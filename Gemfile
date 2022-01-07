@@ -76,3 +76,6 @@ end
 
 gem "devise"
 gem "simple_form"
+gem "annotate"
+gem "erd"
+gem 'pagy', '~> 5.7' # omit patch digit

@@ -1,24 +1,12 @@
-# README
+to create i made:
+rails new bootstrap_demo -j esbuild --css bootstrap
+yarn add bootstrap-icons
+rails generate simple_form:install
+rails generate devise:views
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+to run
+bin/dev
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#"./bin/build-css"
