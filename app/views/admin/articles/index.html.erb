@@ -1,14 +1,19 @@
-<p style="color: green"><%= notice %></p>
 
-<h1>Articles</h1>
 
-<div id="articles">
-  <% @articles.each do |article| %>
-    <%= render article %>
-    <p>
-      <%= link_to "Show this article", [:admin, article] %>
-    </p>
-  <% end %>
+<div class="card">
+  <div class="card-header">
+    <h2>Articles</h2>
+  </div>
+  <div class="card-body">
+    <div id="articles">
+      <% @articles.each do |article| %>
+        <%= render article %>
+        <p>
+          <%= link_to "Show this article", [:admin, article] %>
+        </p>
+      <% end %>
+    </div>
+
+    <%= link_to "New article", new_admin_article_path %>
+  </div>
 </div>
-
-<%= link_to "New article", new_admin_article_path %>
