@@ -15,7 +15,7 @@
       </ul>
     </div>
     <hr class="w-100" style="height:2px; color:grey;">
-    <ul class="ms-1 mt-1 nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+    <ul class="ms-1 mt-1 nav nav-pills flex-column  mb-0 align-items-center align-items-sm-start" id="menu">
       <li class="nav-item">
         <a href="/admin" class="nav-link align-middle px-0">
           <i class="bi-house-fill"></i>
@@ -24,45 +24,45 @@
       </li>
       <li class="nav-item mt-1">
         <a href="/admin/articles" class="nav-link align-middle px-0">
+            <i class="bi-file-earmark-image"></i>
+          <span class="ms-2 fw-600 d-none d-sm-inline">Media</span>
+        </a>
+      </li>
+      <li class="nav-item mt-1">
+        <a href="/admin/articles" class="nav-link align-middle px-0">
+            <i class="bi-list-nested"></i>
+          <span class="ms-2 fw-600 d-none d-sm-inline">Pages</span>
+        </a>
+      </li>
+      <li class="nav-item mt-1">
+        <a href="/admin/articles" class="nav-link align-middle px-0">
+            <i class="bi-menu-app"></i>
+          <span class="ms-2 fw-600 d-none d-sm-inline">Menus</span>
+        </a>
+      </li>
+      <li class="nav-item mt-1">
+        <a href="/admin/articles" class="nav-link align-middle px-0">
+            <i class="bi-cup-fill"></i>
+          <span class="ms-2 fw-600 d-none d-sm-inline">Forms</span>
+        </a>
+      </li>
+    </ul>
+    <hr class="w-100" style="height:2px; color:grey;">
+    <ul class="ms-1 mt-1 nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+      <li class="nav-item mt-1">
+        <a href="/admin/articles" class="nav-link align-middle px-0">
             <i class="bi-cart-fill"></i>
           <span class="ms-2 fw-600 d-none d-sm-inline">Articles</span>
         </a>
       </li>
-      <li class="nav-item mt-1">
-        <a href="/admin/users" class="nav-link align-middle px-0">
 
-            <i class="bi-people-fill"></i>
-          <span class="ms-2 fw-600 d-none d-sm-inline">Users</span>
-        </a>
-      </li>
       <li class="nav-item mt-1">
         <a href="#" class="nav-link align-middle px-0">
-
-            <i class="bi-shield-fill-check"></i>
-          <span class="ms-2 fw-600 d-none d-sm-inline">Roles</span>
-        </a>
-      </li>
-      <li class="nav-item mt-1">
-        <a href="#" class="nav-link align-middle px-0">
-
-<i class="bi-file-richtext-fill"></i>
+          <i class="bi-file-richtext-fill"></i>
           <span class="ms-2 fw-600 d-none d-sm-inline">C.M.S</span>
+        </a>
+      </li>
 
-        </a>
-      </li>
-      <li class="nav-item mt-1">
-        <a href="#" class="nav-link align-middle px-0">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-activity me-1" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z" /> </svg>
-          <span class="ms-2 fw-600 d-none d-sm-inline">Activity</span>
-        </a>
-      </li>
-      <li class="nav-item mt-1">
-        <a href="/admin/settings" class="nav-link align-middle px-0">
-          <i class="bi-wrench"></i>
-          <span class="ms-2 fw-600 d-none d-sm-inline">Settings</span>
-        </a>
-      </li>
     </ul>
     <hr class="w-100" style="height:2px; color:grey;">
     <div class="dropdown mb-1">
@@ -80,6 +80,31 @@
         <li><a class="dropdown-item" href="/">Sign out</a></li>
       </ul>
     </div>
+
+      <a href="/admin/users" class="nav-link align-middle px-0">
+          <i class="bi-people-fill"></i>
+        <span class="ms-2 fw-600 d-none d-sm-inline">Users</span>
+      </a>
+
+      <a href="#" class="nav-link align-middle px-0">
+          <i class="bi-shield-fill-check"></i>
+        <span class="ms-2 fw-600 d-none d-sm-inline">Roles</span>
+      </a>
+
+
+
+      <a href="#" class="nav-link align-middle px-0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-activity me-1" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z" /> </svg>
+        <span class="ms-2 fw-600 d-none d-sm-inline">Activity</span>
+      </a>
+
+
+      <a href="/admin/settings" class="nav-link align-middle px-0">
+        <i class="bi-wrench"></i>
+        <span class="ms-2 fw-600 d-none d-sm-inline">Settings</span>
+      </a>
+
     <a href="#" class="nav-link align-middle px-0 mb-1">
         <i class="bi-credit-card"></i>
       <span class="ms-2 fw-600 d-none d-sm-inline">Usage</span>
