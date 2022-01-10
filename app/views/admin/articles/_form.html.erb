@@ -8,8 +8,9 @@
     <%= f.input :intro %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-actions text-right">
+    <%= link_to "Back", admin_articles_path, class: 'btn button-secondary' %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
   </div>
-  <i class="bi-alarm"></i>
+  
 <% end %>

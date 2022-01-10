@@ -13,10 +13,10 @@
   <body class='admin container-fluid bg-light'>
     <div class="row flex-nowrap">
       <%= render "admin/shared/sidebar" %>
-
       <div class="main col pt-5">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+
+        <%= render "admin/shared/notices" %>
+
         <%= yield %>
       </div>
   </div>
