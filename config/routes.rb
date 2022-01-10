@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :admin do
+    root "tractor#dash"
+    get 'dash', to: 'tractor#dash'
+
     resources :articles
   end
   resources :articles
