@@ -10,13 +10,14 @@
 </div>
 <div class="card">
         <div class="card-body">
+
           <%= search_form_for [:admin,@q], class: :search  do |f| %>
-            <div class="form-row">
-              <div class="col">
-                <%= f.label :name_cont, class: "sr-only" %>
-                <%= f.search_field :name_cont, class: "form-control", placeholder: "Name" %>
+
+            <div class="row gy-2 gx-3 align-items-center">
+              <div class="col-auto">
+                <%= f.search_field :name_cont, class: "form-control", placeholder: "Name Contains" %>
               </div>
-              <div class="col">
+              <div class="col-auto">
               <%= f.submit  class: 'btn btn-primary' %>
               </div>
             </div>
@@ -54,7 +55,7 @@
                       <%= link_to "<i class='bi-trash'></i>".html_safe, admin_media_path(media), data: {
                                   turbo_method: :delete,
                                   turbo_confirm: "Are you sure?"
-                                } %>                      
+                                } %>
                     </td>
                 <% end %>
               <tr>
