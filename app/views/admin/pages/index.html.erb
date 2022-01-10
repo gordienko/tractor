@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-8">
+      <h6 class="header-pretitle">index</h6>
+      <h1 class="header-title">Pages</h1>
+    </div>
+    <div class="col-4 text-right">
+      <a class="btn btn-primary" href="/admin/pages/new">  Add Page</a>
+    </div>
+  </div>
+<div class="card">
+  <div class="card-body">
+    <div id="articles">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+
+      <% @pages.each do |page| %>
+          <tr>
+            <td><%= page.id %></td>
+            <td><%= page.title %></td>
+          </tr>
+      <% end %>
+      </table>
+    </div>
+
+
+  </div>
+</div>

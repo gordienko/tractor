@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: pages
+#
+#  id          :integer          not null, primary key
+#  tile        :string
+#  description :text
+#  keywords    :string
+#  slug        :string
+#  position    :integer
+#  parent_id   :integer
+#  template    :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tile: MyString
+  description: MyText
+  keywords: MyString
+  slug: MyString
+  position: 1
+  parent_id: 1
+  template: MyString
+
+two:
+  tile: MyString
+  description: MyText
+  keywords: MyString
+  slug: MyString
+  position: 1
+  parent_id: 1
+  template: MyString

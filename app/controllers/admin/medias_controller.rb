@@ -1,5 +1,5 @@
 class Admin::MediasController < AdminController
-    before_action :set_media, only: [:show, :edit, :update, :destroy]
+  before_action :set_media, only: [:show, :edit, :update, :destroy]
   def index
     # @media = Media.all
     @q = Media.ransack(params[:q])

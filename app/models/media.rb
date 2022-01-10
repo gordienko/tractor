@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: medias
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Media < ApplicationRecord
   has_one_attached :file
   #validate :correct_document_mime_type
