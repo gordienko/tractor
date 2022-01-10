@@ -21,7 +21,7 @@ $display-font-sizes: (
   6: 2rem
 );
 $display-font-weight: 700;
-$headings-font-weight: 700;
+$headings-font-weight: 300;
 
 $secondary: #89898e;
 $success: #31bc60;
@@ -97,7 +97,7 @@ html {
     }
   }
   h1 {
-    font-weight: 800;
+    font-weight: 200;
   }
   h2 {
     margin-top: 5rem;
@@ -220,25 +220,19 @@ html {
 .admin {
 
   nav a {
-    span {
-      color: $gray-500;
-    }
 
-    svg {
-      fill: $gray-500;
-      transition: fill 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    }
+      color: $gray-500;
+
+
+
   }
 
   nav a:hover {
-    span {
-      color: $white;
-    }
 
-    svg {
-      fill: $white;
-      transition: fill 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-    }
+      color: $white;
+
+
+  
   }
 
   .table > tbody {
