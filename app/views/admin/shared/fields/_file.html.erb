@@ -20,7 +20,7 @@
           Width: <%= f.object.send(field).metadata['width'] %>px Height: <%= f.object.send(field).metadata['height'] %>px
         <% end %>
         Size: <%= number_to_human_size f.object.send(field).byte_size %>
-        <%= f.input "#{field}_destroy", as: :boolean, label: 'Remove File?' %>
+        <%= f.input "#{field}_destroy", as: :boolean, label: 'Remove File?' if destroyable %>
       <% else %>
         <div class="file-field-image">
          <i class="bi-camera-fill"></i>

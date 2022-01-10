@@ -1,28 +1,25 @@
 <%= simple_form_for([:admin, @media]) do |f| %>
-<%= f.error_notification %>
-<%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-
-    <div class="form-inputs">
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="form-inputs">
     <%= f.input :name %>
     <%= render "/admin/shared/fields/file",
         f: f,
         field: 'file',
         label: 'Media File',
-        hint: 'Add a file. Take the time to prepare it for the web first.'
+        hint: 'Add a file. Take the time to prepare it for the web first.',
+        destroyable: false
       %>
-    </div>
-
-
-
-
-
-
-
+  </div>
   <div class="form-group">
     <div class="form-group actions">
       <% if media.persisted? %>
-          <%= link_to "#{icon('fas', 'trash')}".html_safe, media, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+        <%= link_to "<i class='bi-trash'></i>".html_safe, admin_media_path(@media), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+
+
       <% end %>
       <div class="form-actions text-right">
         <%= link_to "Cancel", admin_medias_path, class: "btn btn-link"  %>

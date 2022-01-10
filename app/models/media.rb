@@ -2,7 +2,9 @@ class Media < ApplicationRecord
   has_one_attached :file
   #validate :correct_document_mime_type
   validates :name, presence: true
-   validate :file_is_attached
+  validate :file_is_attached
+  attr_accessor :file_destroy
+  include Destroyable
 
   def file_is_attached
     unless file.attached?

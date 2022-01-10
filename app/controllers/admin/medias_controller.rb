@@ -56,10 +56,11 @@ class Admin::MediasController < AdminController
   # PATCH/PUT /media/1
   # PATCH/PUT /media/1.json
   def update
-    authorize @media
+    #authorize @media
     respond_to do |format|
+      @media.destroy_attachment('file', media_params)
       if @media.update(media_params)
-        format.html { redirect_to edit_media_path(@media), notice: 'Media was successfully updated.' }
+        format.html { redirect_to edit_admin_media_path(@media), notice: 'Media was successfully updated.' }
         format.json { render :show, status: :ok, location: @media }
       else
         format.html { render :edit }
@@ -96,6 +97,6 @@ class Admin::MediasController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def media_params
-      params.require(:media).permit(:name,  :file)
+      params.require(:media).permit(:name,  :file, :file_destroy)
     end
 end
