@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :medias
     resources :pages
     resources :articles
+    resources :userforms
 
   end
   resources :articles, only: [:index, :show]

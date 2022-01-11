@@ -1,17 +1,15 @@
-<%= simple_form_for([:admin, @page]) do |f| %>
+<%= simple_form_for([:admin, @userform]) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :title %>
-    
-    <h2>Meta</h2>
-    <%= f.input :description %>
-    <%= f.input :keywords %>
+    <%= f.input :name %>
+    <%= f.input :user_notification %>
+    <%= f.input :admin_notification %>
   </div>
 
   <div class="form-actions text-right">
-    <%= link_to "Back", admin_pages_path, class: 'btn button-secondary' %>
+    <%= link_to "Back", admin_userforms_path, class: 'btn button-secondary' %>
     <%= f.button :submit, class: 'btn btn-primary' %>
   </div>
 <% end %>

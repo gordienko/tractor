@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: userform_fields
+#
+#  id          :integer          not null, primary key
+#  field_type  :string
+#  name        :string
+#  hint        :string
+#  default     :string
+#  placeholder :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  userform_id :integer
+#
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  field_type: MyString
+  name: MyString
+  hint: MyString
+  default: MyString
+  placeholder: MyString
+
+two:
+  field_type: MyString
+  name: MyString
+  hint: MyString
+  default: MyString
+  placeholder: MyString

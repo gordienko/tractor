@@ -1,22 +1,21 @@
 # == Schema Information
 #
-# Table name: pages
+# Table name: userform_fields
 #
 #  id          :integer          not null, primary key
-#  title       :string
-#  description :text
-#  keywords    :string
-#  slug        :string
-#  position    :integer
-#  parent_id   :integer
-#  template    :string
+#  field_type  :string
+#  name        :string
+#  hint        :string
+#  default     :string
+#  placeholder :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  userform_id :integer
 #
 
 require "test_helper"
 
-class PageTest < ActiveSupport::TestCase
+class UserformFieldTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

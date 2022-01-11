@@ -3,7 +3,7 @@
 # Table name: pages
 #
 #  id          :integer          not null, primary key
-#  tile        :string
+#  title       :string
 #  description :text
 #  keywords    :string
 #  slug        :string
@@ -15,4 +15,5 @@
 #
 
 class Page < ApplicationRecord
+  validates :title, presence: true
 end

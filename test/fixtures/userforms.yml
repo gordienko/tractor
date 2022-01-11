@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: userforms
+#
+#  id                 :integer          not null, primary key
+#  name               :string
+#  user_notification  :text
+#  admin_notification :text
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  user_notification: MyString
+  admin_notification: MyString
+
+two:
+  name: MyString
+  user_notification: MyString
+  admin_notification: MyString
