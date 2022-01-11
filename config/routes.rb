@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   namespace :admin do
     root "tractor#dash"
     get 'dash', to: 'tractor#dash'
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
     resources :articles
     resources :userforms
     resources :menus
+    resources :users
 
   end
   resources :articles, only: [:index, :show]

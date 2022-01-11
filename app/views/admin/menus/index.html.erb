@@ -13,15 +13,13 @@
       <table class="table">
         <thead>
           <tr>
-            <th>id</th>
-            <th>name</th>
+            <th>Name</th>
             <th class="actions"></th>
           </tr>
         </thead>
 
       <% @menus.each do |menu| %>
-          <tr>
-            <td><%= menu.id %></td>
+          <tr>            
             <td><%= menu.name %></td>
             <td class="actions">
               <%= link_to "<i class='bi-pencil'></i>".html_safe, edit_admin_menu_path(menu) %>
