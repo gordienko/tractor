@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'activity', to: 'site#activity'
     get 'settings', to: 'site#settings'
     get 'homepage', to: 'site#homepage'
+    get 'help', to: 'site#help'
     resources :site, only: [:update]
     resources :medias
     resources :pages
