@@ -21,6 +21,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :role, presence: true         
 
 
   def full_name

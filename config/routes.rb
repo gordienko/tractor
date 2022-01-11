@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
   namespace :admin do
-    root "tractor#dash"
-    get 'dash', to: 'tractor#dash'
+    root "site#dash"
+    get 'dash', to: 'site#dash'
+    get 'activity', to: 'site#activity'
+    get 'settings', to: 'site#settings'
+    get 'homepage', to: 'site#homepage'
+    resources :site, only: [:update]
     resources :medias
     resources :pages
     resources :articles
