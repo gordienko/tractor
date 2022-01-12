@@ -80,3 +80,4 @@ gem "annotate"
 gem "erd"
 gem 'pagy', '~> 5.7' # omit patch digit
 gem 'ransack'
+gem "acts_as_list"

@@ -1,8 +1,8 @@
 class Admin::PagesController < AdminController
-  before_action :set_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_page, only: [:show, :edit, :update, :destroy, :move]
 
   def index
-    @pages = Page.all
+    @pages = Page.all.order(position: :asc)
   end
 
   def new
@@ -49,11 +49,16 @@ end
     end
   end
 
+  def move
+    @page.insert_at(params[:position].to_i)
+    head :ok
+  end
+
   def set_page
     @page = Page.find(params[:id])
   end
 
   def page_params
-    params.require(:page).permit(:title)
+    params.require(:page).permit(:title, :content)
   end
 end

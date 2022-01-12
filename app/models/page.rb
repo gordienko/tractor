@@ -16,4 +16,6 @@
 
 class Page < ApplicationRecord
   validates :title, presence: true
+  has_rich_text :content
+  acts_as_list
 end

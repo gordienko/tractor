@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     get 'help', to: 'site#help'
     resources :site, only: [:update]
     resources :medias
-    resources :pages
+    resources :pages do
+      member do
+        patch :move
+      end
+    end
     resources :articles
     resources :userforms
     resources :menus

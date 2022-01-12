@@ -25,3 +25,17 @@
 .form-group{
   margin-bottom: 1em;
 }
+.sortable-ghost{
+  border: 1px solid #ccc;
+}
+.ui-sortable-helper {
+  background:green;
+}
+.handle{
+  cursor: grab;
+}
+.sortable-chosen, .sortable-chosen td{
+  background-color: #ccc;
+//  color: white;
+  box-shadow: 2px 2px 2px rgba(#333, 0.5);
+}
