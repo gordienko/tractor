@@ -29,3 +29,26 @@
   padding: 0 !important;
   max-width: 100% !important;
 }
+trix-toolbar {
+  background-color: white;
+  border: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 10px 10px 0;
+}
+trix-editor{
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border: none;
+}
+
+.trix-button--icon-heading-1,
+.trix-button--icon-heading-1 { display: none; }
+
+.trix-button--icon-attach,
+.trix-button--icon-increase-nesting-level,
+.trix-button--icon-decrease-nesting-level { display: none; }
+
+a.trix-button{line-height: 23px}

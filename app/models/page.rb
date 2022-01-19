@@ -16,6 +16,12 @@
 
 class Page < ApplicationRecord
   validates :title, presence: true
+  validates :template, presence: true
   has_rich_text :content
   acts_as_list
+
+
+  def self.templates
+    ['Standard', 'Contact', 'History' ]
+  end
 end

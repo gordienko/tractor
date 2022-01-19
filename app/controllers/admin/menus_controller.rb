@@ -23,13 +23,13 @@ class Admin::MenusController < AdminController
         format.html { redirect_to edit_admin_menu_path(@menu), notice: 'Menu was successfully updated.' }
         format.json { render :show, status: :ok, location: @menu }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @menu.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def create
+
     def create
       @menu = Menu.new(menu_params)
       if @menu.save
@@ -38,7 +38,7 @@ class Admin::MenusController < AdminController
          render :new, status: :unprocessable_entity
       end
     end
-  end
+
 
   def destroy
     @menu.destroy

@@ -23,13 +23,13 @@ class Admin::UserformsController < AdminController
         format.html { redirect_to edit_admin_userform_path(@userform), notice: 'UserForm was successfully updated.' }
         format.json { render :show, status: :ok, location: @userform }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @userform.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def create
+
     def create
       @userform = Userform.new(userform_params)
       if @userform.save
@@ -38,7 +38,7 @@ class Admin::UserformsController < AdminController
          render :new, status: :unprocessable_entity
       end
     end
-  end
+
 
   def destroy
     @userform.destroy

@@ -19,32 +19,30 @@ class Admin::PagesController < AdminController
 def update
   #authorize @media
   respond_to do |format|
-
     if @page.update(page_params)
       format.html { redirect_to edit_admin_page_path(@page), notice: 'Page was successfully updated.' }
       format.json { render :show, status: :ok, location: @page }
     else
-      format.html { render :edit }
+      format.html { render :edit , status: :unprocessable_entity}
       format.json { render json: @page.errors, status: :unprocessable_entity }
     end
   end
 end
 
-  def create
+
     def create
       @page = Page.new(page_params)
       if @page.save
-         redirect_to admin_pages_path, notice: "Page was successfully created."
+         redirect_to edit_admin_page_path(@page), notice: "Page was successfully created."
       else
          render :new, status: :unprocessable_entity
       end
     end
-  end
 
   def destroy
-    @userform.destroy
+    @page.destroy
     respond_to do |format|
-      format.html { redirect_to admin_pages_path, notice: 'UserForm deleted.' }
+      format.html { redirect_to admin_pages_path, notice: 'Page deleted.' }
       format.json { head :no_content }
     end
   end
@@ -59,6 +57,6 @@ end
   end
 
   def page_params
-    params.require(:page).permit(:title, :content)
+    params.require(:page).permit(:title, :content, :template, :keywords, :description)
   end
 end
