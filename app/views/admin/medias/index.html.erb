@@ -37,13 +37,8 @@
               <% @medias.each do |media| %>
                 <tr>
                     <td>
-                      <% if media.file.attached? %>
-                        <% if media.file.previewable?  %>
-                          <%= image_tag media.file.preview(resize_to_limit: [100, 100]), class: "img-thumbnail" %>
-                        <% elsif media.file.filename.extension.in? ['jpg', 'png'] %>
-                          <%= image_tag media.file.variant(resize_to_limit: [100, 100]), class: "img-thumbnail" %><br>
-                        <% end %>
-                      <% end %>
+
+                      <%= render "media_preview", media: media, x: 100, y: 100 %>
                     </td>
                     <td>
                       <%= media.file.filename if media.file.attached? %>

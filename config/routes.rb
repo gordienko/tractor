@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     get 'homepage', to: 'site#homepage'
     get 'help', to: 'site#help'
     resources :site, only: [:update]
-    resources :medias
+    resources :medias do
+      get :picker
+    end
     resources :pages do
       member do
         patch :move
@@ -18,9 +20,11 @@ Rails.application.routes.draw do
     resources :userforms
     resources :menus
     resources :users
-
+    resource :embed, only: :update
   end
+  resources :youtube, only: :show
   resources :articles, only: [:index, :show]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

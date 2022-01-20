@@ -10,6 +10,7 @@ import jquery from 'jquery';
 window.jQuery = jquery;
 window.$ = jquery;
 
+// import "youtube"
 
 import "./trixmods"
 import "@rails/actiontext"

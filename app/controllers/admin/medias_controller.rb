@@ -15,6 +15,10 @@ class Admin::MediasController < AdminController
     end
   end
 
+  def picker
+    @medias = Media.all
+  end
+
   # GET /media/1
   # GET /media/1.json
   def show

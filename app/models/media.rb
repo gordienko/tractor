@@ -9,6 +9,7 @@
 #
 
 class Media < ApplicationRecord
+  include ActionText::Attachable
   has_one_attached :file
   #validate :correct_document_mime_type
   validates :name, presence: true
@@ -35,6 +36,4 @@ class Media < ApplicationRecord
      file.filename
    end
  end
-
-
 end

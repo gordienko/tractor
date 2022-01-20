@@ -7,5 +7,5 @@ import { application } from "./application"
 import DragController from "./drag_controller"
 application.register("drag", DragController)
 
-import TrixController from "./trix_controller"
-application.register("drag", DragController)
+import TricksController from "./tricks_controller"
+application.register("tricks", TricksController)

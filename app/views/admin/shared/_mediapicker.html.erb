@@ -1,0 +1,30 @@
+<!-- Modal -->
+<div class="modal fade " id="mediapickerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Media Picker</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row row-cols-6">
+            <% Media.all.order(created_at: :desc ).each do |media| %>
+              <div class="col">
+                <div class="media-item">
+                  <%= render "/admin/medias/media_preview", x: 100, y: 100, media: media %><br>
+                  <%= media.name %> <br>(<%= truncate(media.file.filename.to_s, length: 10) %> <%= number_to_human_size media.file.byte_size %>)
+                </div>
+
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

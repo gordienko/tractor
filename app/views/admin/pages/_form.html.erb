@@ -4,7 +4,7 @@
 
   <div class="form-inputs">
     <%= f.input :title %>
-    <%= f.rich_text_area :content %>
+    <%= f.rich_text_area :content, data: { controller: "tricks" } %>
     <hr>
     <%= f.input :template, as: :select, collection: Page.templates %>
     <h2>Meta</h2>
