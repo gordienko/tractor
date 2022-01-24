@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row row-cols-6">
+    <% @medias.order(created_at: :desc ).each do |media| %>
+      <div class="col">
+        <div class="media-item" data-action="click->tricks#choosemedia">
+          <%= render "/admin/medias/media_preview", x: 100, y: 100, media: media %><br>
+          <%= media.name %> <br>(<%= truncate(media.file.filename.to_s, length: 10) %> <%= number_to_human_size media.file.byte_size %>)
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

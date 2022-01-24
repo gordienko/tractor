@@ -15,6 +15,11 @@ class Admin::MediasController < AdminController
     end
   end
 
+  def search
+    @medias = Media.all
+    render layout: false
+  end
+
   def picker
     @medias = Media.all
   end

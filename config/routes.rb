@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     resources :site, only: [:update]
     resources :medias do
       get :picker
+      collection do
+        get 'search'
+      end
     end
     resources :pages do
       member do

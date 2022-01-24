@@ -5,14 +5,14 @@ import Rails from "@rails/ujs"
 addHeadingAttributes()
 
 export default class extends Controller {
-  // static get targets() {
-  //     return [ "editor", "imageFields", "altField" ]
-  // }
+  static get targets() {
+      return [ "field" ]
+  }
 
   connect() {
-    this.addMediaButton()
-    this.addMediaDialog()
-    this.eventListenerForMediaButton()
+    // this.addMediaButton()
+    // this.addMediaDialog()
+    // this.eventListenerForMediaButton()
 
     this.addEmbedButton()
     this.addEmbedDialog()
@@ -22,34 +22,71 @@ export default class extends Controller {
     this.insertHeadingElements()
   }
 
-  addMediaButton() {
-    const buttonHTML = '<button type="button" class="trix-button" data-trix-attribute="media" data-trix-action="media" title="Media" tabindex="-1">Image</button>'
-    this.buttonGroupFileTools.insertAdjacentHTML("beforeend", buttonHTML)
-  }
+  //////////////// MEDIA ////////////////////////////////////////////////////
 
-  addMediaDialog(){
-    const DialogHTML = '
-    <div class="modal fade " id="mediapickerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Media Picker</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="container">
-              boo
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>'
-    this.dialogsElement.insertAdjacentHTML("beforeend", dialogHTML)
-  }
+  // addMediaButton() {
+  //   const buttonHTML = '<button type="button" class="trix-button" data-trix-attribute="media" data-trix-action="media" title="Media" tabindex="-1">Image</button>'
+  //   this.buttonGroupFileTools.insertAdjacentHTML("beforeend", buttonHTML)
+  // }
+  //
+  // addMediaDialog(){
+  //   const dialogHTML = `<div class="trix-dialog trix-dialog--link trix-dialog--media" data-trix-dialog="media" data-trix-dialog-attribute="media">
+  //                         <div class="trix-dialog__link-fields">
+  //                           <input type="text" name="media" class="trix-input trix-input--dialog" placeholder="Search for Media" aria-label="Media Picker" required="" data-trix-input="" disabled="disabled">
+  //                           <div class="trix-button-group">
+  //                             <input type="button" class="trix-button trix-button--dialog" data-trix-custom="add-media" value="Add">
+  //                           </div>
+  //                           </div>
+  //                           <div id='media-finder' class='media-finder' data-trix-custom="media-finder">
+  //                         </div>
+  //                       </div>`
+  //   this.dialogsElement.insertAdjacentHTML("beforeend", dialogHTML)
+  // }
+  //
+  // eventListenerForMediaButton(){
+  //
+  //   document.querySelector('[data-trix-action="media"]').addEventListener("click", event => {
+  //     const dialog = document.querySelector('[data-trix-dialog="media"]')
+  //     const mediaInput = document.querySelector('[name="media"]')
+  //     if (event.target.classList.contains("trix-active")) {
+  //       event.target.classList.remove("trix-active");
+  //       dialog.classList.remove("trix-active");
+  //       delete dialog.dataset.trixActive;
+  //       mediaInput.setAttribute("disabled", "disabled");
+  //     } else {
+  //       event.target.classList.add("trix-active");
+  //       dialog.classList.add("trix-active");
+  //       dialog.dataset.trixActive = "";
+  //       mediaInput.removeAttribute("disabled");
+  //       mediaInput.focus();
+  //
+  //       console.log('get medias')
+  //       let place = dialog.querySelector('[data-trix-custom="media-finder"]')
+  //       fetch('/admin/medias/search')
+  //         .then(response => response.text())
+  //         .then(html => place.innerHTML = html)
+  //       // Rails.ajax({
+  //       //   type: 'GET',
+  //       //   url: '/admin/medias/search',
+  //       //   success: (one, thing, more) => {
+  //       //     console.log(JSON.stringify(one))
+  //       //     console.log(one)
+  //       //     console.log(thing)
+  //       //     console.log(more)
+  //       //     let place = dialog.querySelector('[data-trix-custom="media-finder"]')
+  //       //     console.log(place)
+  //       //     place.innerHTML = content
+  //       //   }
+  //       // })
+  //     }
+  //   })
+  // }
+  //
+  // choosemedia(){
+  //   console.log('choosemedia')
+  // }
+
+  //////////////// EMBEDS ////////////////////////////////////////////////////
 
   addEmbedButton() {
     const buttonHTML = '<button type="button" class="trix-button" data-trix-attribute="embed" data-trix-action="embed" title="Embed" tabindex="-1">Embed</button>'
@@ -70,6 +107,9 @@ export default class extends Controller {
   }
 
   eventListenerForEmbedButton() {
+    console.log(this)
+    console.log(this.element)
+
     document.querySelector('[data-trix-action="embed"]').addEventListener("click", event => {
       const dialog = document.querySelector('[data-trix-dialog="embed"]')
       const embedInput = document.querySelector('[name="embed"]')
@@ -108,7 +148,7 @@ export default class extends Controller {
       }
     })
   }
-
+  //////////////// HEADERS ////////////////////////////////////////////////////
   insertHeadingElements() {
     this.removeOriginalHeadingButton()
     this.insertNewHeadingButton()
@@ -126,6 +166,29 @@ export default class extends Controller {
    this.dialogsElement.insertAdjacentHTML("beforeend", this.dialogHeadingTemplate)
   }
 
+  get dialogHeadingTemplate() {
+    return `
+      <div class="trix-dialog trix-dialog--heading" data-trix-dialog="x-heading" data-trix-dialog-attribute="x-heading">
+        <div class="trix-dialog__link-fields">
+
+          <div class="trix-button-group">
+            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading1">H1</button>
+            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading2">H2</button>
+            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading3">H3</button>
+            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading4">H4</button>
+            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading5">H5</button>
+            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading6">H6</button>
+          </div>
+        </div>
+      </div>
+    `
+  }
+
+  get headingButtonTemplate() {
+     return '<button type="button" class="trix-button trix-button--icon trix-button--icon-heading-1" data-trix-action="x-heading" title="Heading" tabindex="-1">Heading</button>'
+   }
+
+  //////////////// UTILS ////////////////////////////////////////////////////
   get buttonGroupBlockTools() {
    return this.toolbarElement.querySelector("[data-trix-button-group=block-tools]")
  }
@@ -150,27 +213,9 @@ export default class extends Controller {
    return this.toolbarElement.querySelector("[data-trix-attribute=heading1]")
  }
 
- get headingButtonTemplate() {
-    return '<button type="button" class="trix-button trix-button--icon trix-button--icon-heading-1" data-trix-action="x-heading" title="Heading" tabindex="-1">Heading</button>'
-  }
 
-  get dialogHeadingTemplate() {
-    return `
-      <div class="trix-dialog trix-dialog--heading" data-trix-dialog="x-heading" data-trix-dialog-attribute="x-heading">
-        <div class="trix-dialog__link-fields">
 
-          <div class="trix-button-group">
-            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading1">H1</button>
-            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading2">H2</button>
-            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading3">H3</button>
-            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading4">H4</button>
-            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading5">H5</button>
-            <button type="button" class="trix-button trix-button--dialog" data-trix-attribute="heading6">H6</button>
-          </div>
-        </div>
-      </div>
-    `
-  }
+
 
   // insertAttachment(event) {
   //   let attachment = new Trix.Attachment({content: `<span class="trix-attachment-starship-image" data-label="Alt text">
