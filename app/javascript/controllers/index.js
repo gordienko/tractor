@@ -9,3 +9,6 @@ application.register("drag", DragController)
 
 import TricksController from "./tricks_controller"
 application.register("tricks", TricksController)
+
+import BebopController from "./bebop_controller"
+application.register("bebop", BebopController)

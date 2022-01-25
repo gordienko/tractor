@@ -15,11 +15,11 @@ export default class extends Controller {
     // this.eventListenerForMediaButton()
 
     this.addEmbedButton()
-    this.addEmbedDialog()
-    this.eventListenerForEmbedButton()
-    this.eventListenerForAddEmbedButton()
+     this.addEmbedDialog()
+     this.eventListenerForEmbedButton()
+    // this.eventListenerForAddEmbedButton()
 
-    this.insertHeadingElements()
+    // this.insertHeadingElements()
   }
 
   //////////////// MEDIA ////////////////////////////////////////////////////
@@ -89,13 +89,13 @@ export default class extends Controller {
   //////////////// EMBEDS ////////////////////////////////////////////////////
 
   addEmbedButton() {
-    const buttonHTML = '<button type="button" class="trix-button" data-trix-attribute="embed" data-trix-action="embed" title="Embed" tabindex="-1">Embed</button>'
+    const buttonHTML = '<button  type="button" class="trix-button tricks-embed"  data-trix-attribute="embed" data-trix-action="embed"   data-action="click->tricks#showembed" title="Embed" tabindex="-1">Embed</button>'
     this.buttonGroupBlockTools.insertAdjacentHTML("beforeend", buttonHTML)
   }
 
 
   addEmbedDialog() {
-    const dialogHTML = `<div class="trix-dialog trix-dialog--link" data-trix-dialog="embed" data-trix-dialog-attribute="embed">
+    const dialogHTML = `<div class="trix-dialog trix-dialog--link" data-trix-dialog="embed" data-trix-dialog-attribute="embed" data-tricks-target="embeddialog">
                           <div class="trix-dialog__link-fields">
                             <input type="text" name="embed" class="trix-input trix-input--dialog" placeholder="Paste your URL" aria-label="embed code" required="" data-trix-input="" disabled="disabled">
                             <div class="trix-button-group">
@@ -106,28 +106,48 @@ export default class extends Controller {
     this.dialogsElement.insertAdjacentHTML("beforeend", dialogHTML)
   }
 
+  showembed(){
+    console.log('showembed')
+    // const dialog = this.element.querySelector('[data-trix-dialog="embed"]')
+    // const embedInput = this.element.querySelector('[name="embed"]')
+    // if (event.target.classList.contains("trix-active")) {
+    //   event.target.classList.remove("trix-active");
+    //   dialog.classList.remove("trix-active");
+    //   delete dialog.dataset.trixActive;
+    //   embedInput.setAttribute("disabled", "disabled");
+    // } else {
+    //   event.target.classList.add("trix-active");
+    //   dialog.classList.add("trix-active");
+    //   dialog.dataset.trixActive = "";
+    //   embedInput.removeAttribute("disabled");
+    //   embedInput.focus();
+    // }
+  }
+
   eventListenerForEmbedButton() {
     console.log(this)
     console.log(this.element)
-
+    console.log('bebop')
+     console.log(this.element.querySelector(".trix-button-row"))
     document.querySelector('[data-trix-action="embed"]').addEventListener("click", event => {
-      const dialog = document.querySelector('[data-trix-dialog="embed"]')
-      const embedInput = document.querySelector('[name="embed"]')
-      if (event.target.classList.contains("trix-active")) {
-        event.target.classList.remove("trix-active");
-        dialog.classList.remove("trix-active");
-        delete dialog.dataset.trixActive;
-        embedInput.setAttribute("disabled", "disabled");
-      } else {
-        event.target.classList.add("trix-active");
-        dialog.classList.add("trix-active");
-        dialog.dataset.trixActive = "";
-        embedInput.removeAttribute("disabled");
-        embedInput.focus();
-      }
+    // const dialog = document.querySelector('[data-trix-dialog="embed"]')
+    const dialog = this.embeddialogTarget
+    const embedInput = document.querySelector('[name="embed"]')
+    if (event.target.classList.contains("trix-active")) {
+      event.target.classList.remove("trix-active");
+      dialog.classList.remove("trix-active");
+      delete dialog.dataset.trixActive;
+      embedInput.setAttribute("disabled", "disabled");
+    } else {
+      event.target.classList.add("trix-active");
+      dialog.classList.add("trix-active");
+      dialog.dataset.trixActive = "";
+      embedInput.removeAttribute("disabled");
+      embedInput.focus();
+    }
     })
   }
-  //
+
   eventListenerForAddEmbedButton() {
     document.querySelector('[data-trix-custom="add-embed"]').addEventListener("click", event => {
       const content = document.querySelector("[name='embed']").value

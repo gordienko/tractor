@@ -57,6 +57,6 @@ end
   end
 
   def page_params
-    params.require(:page).permit(:title, :content, :template, :keywords, :description)
+    params.require(:page).permit(:title, :content, :template, :keywords, :description, :content_two)
   end
 end
