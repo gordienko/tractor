@@ -64,7 +64,6 @@ export default class extends Controller {
 
   eventListenerForAddEmbedButton() {
     this.dialogsElement.querySelector('[data-trix-custom="add-embed"]').addEventListener("click", event => {
-      console.log('embeddy')
       const content = this.dialogsElement.querySelector("[name='embed']").value
       if (content) {
         let _this = this
@@ -151,6 +150,12 @@ export default class extends Controller {
      this.dialogsElement.insertAdjacentHTML("beforeend", dialogHTML)
    }
 
+   eventListenerForMediaButton(){
+     this.toolbarElement.querySelector('[data-trix-action="media"]').addEventListener("click", e => {
+       this.showmedia(e)
+     })
+   }
+
    showmedia(e){
      const dialog = this.dialogsElement.querySelector('[data-trix-dialog="media"]')
      const mediaInput = this.dialogsElement.querySelector('[name="media"]')
@@ -165,24 +170,25 @@ export default class extends Controller {
        dialog.dataset.trixActive = "";
        mediaInput.removeAttribute("disabled");
        mediaInput.focus();
-
-       console.log('get medias')
        let place = dialog.querySelector('[data-trix-custom="media-finder"]')
        fetch('/admin/medias/search')
          .then(response => response.text())
          .then(html => place.innerHTML = html)
+           // this.eventListenerForMediaChosen()
      }
-   }
-   eventListenerForMediaButton(){
-     this.toolbarElement.querySelector('[data-trix-action="media"]').addEventListener("click", e => {
-       this.showmedia(e)
-     })
-
-
 
    }
 
-   choosemedia(){
+
+   // eventListenerForMediaChosen(){
+   //   // console.log(this.dialogsElement)
+   //   this.dialogsElement.querySelector('.media-picker-item').addEventListener("click", e => {
+   //     this.choosemedia(e)
+   //   })
+   // }
+
+   choosemedia(e){
+     console.log(e)
      console.log('choosemedia')
    }
 

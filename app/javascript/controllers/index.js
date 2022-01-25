@@ -7,8 +7,10 @@ import { application } from "./application"
 import DragController from "./drag_controller"
 application.register("drag", DragController)
 
-import TricksController from "./tricks_controller"
-application.register("tricks", TricksController)
+
 
 import BebopController from "./bebop_controller"
 application.register("bebop", BebopController)
+
+import PickController from "./pick_controller"
+application.register("pick", PickController)
