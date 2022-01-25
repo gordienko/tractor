@@ -14,6 +14,11 @@ export default class extends Controller {
     this.eventListenerForAddEmbedButton()
 
     this.insertHeadingElements()
+
+    this.addMediaButton()
+    this.addMediaDialog()
+    this.eventListenerForMediaButton()
+
   }
 
   //////////////// Embeds ////////////////////////////////////////////////////
@@ -123,6 +128,64 @@ export default class extends Controller {
    get originalHeadingButton() {
      return this.toolbarElement.querySelector("[data-trix-attribute=heading1]")
    }
+
+
+   //////////////// MEDIA ////////////////////////////////////////////////////
+
+   addMediaButton() {
+     const buttonHTML = '<button type="button" class="trix-button" data-trix-attribute="media" data-trix-action="media" title="Media" tabindex="-1">Image</button>'
+     this.buttonGroupFileTools.insertAdjacentHTML("beforeend", buttonHTML)
+   }
+
+   addMediaDialog(){
+     const dialogHTML = `<div class="trix-dialog trix-dialog--link trix-dialog--media" data-trix-dialog="media" data-trix-dialog-attribute="media">
+                           <div class="trix-dialog__link-fields">
+                             <input type="text" name="media" class="trix-input trix-input--dialog" placeholder="Search for Media" aria-label="Media Picker" required="" data-trix-input="" disabled="disabled">
+                             <div class="trix-button-group">
+                               <input type="button" class="trix-button trix-button--dialog" data-trix-custom="add-media" value="Add">
+                             </div>
+                             </div>
+                             <div id='media-finder' class='media-finder' data-trix-custom="media-finder">
+                           </div>
+                         </div>`
+     this.dialogsElement.insertAdjacentHTML("beforeend", dialogHTML)
+   }
+
+   showmedia(e){
+     const dialog = this.dialogsElement.querySelector('[data-trix-dialog="media"]')
+     const mediaInput = this.dialogsElement.querySelector('[name="media"]')
+     if (event.target.classList.contains("trix-active")) {
+       event.target.classList.remove("trix-active");
+       dialog.classList.remove("trix-active");
+       delete dialog.dataset.trixActive;
+       mediaInput.setAttribute("disabled", "disabled");
+     } else {
+       event.target.classList.add("trix-active");
+       dialog.classList.add("trix-active");
+       dialog.dataset.trixActive = "";
+       mediaInput.removeAttribute("disabled");
+       mediaInput.focus();
+
+       console.log('get medias')
+       let place = dialog.querySelector('[data-trix-custom="media-finder"]')
+       fetch('/admin/medias/search')
+         .then(response => response.text())
+         .then(html => place.innerHTML = html)
+     }
+   }
+   eventListenerForMediaButton(){
+     this.toolbarElement.querySelector('[data-trix-action="media"]').addEventListener("click", e => {
+       this.showmedia(e)
+     })
+
+
+
+   }
+
+   choosemedia(){
+     console.log('choosemedia')
+   }
+
   //////////////// UTILS ////////////////////////////////////////////////////
 
   get buttonGroupBlockTools() {
