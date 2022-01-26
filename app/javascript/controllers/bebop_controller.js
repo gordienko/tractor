@@ -186,14 +186,20 @@ export default class extends Controller {
    //   })
    // }
 
-   setmedia(e){
-     console.log(e)
-     console.log('setmedia')
+   setmedia(id){
+      console.log(`set ${id}`)
+      let _this = this
+      Rails.ajax({
+        type: 'GET',
+        url: `/admin/medias/${id}/attachment`,
+        success: ({content, sgid}) => {
+          const attachment = new Trix.Attachment({content, sgid})
+          _this.element.editor.insertAttachment(attachment)
+          _this.element.editor.insertLineBreak()
+        }
+      })
    }
 
-   boink(){
-     return 'squeal'
-   }
 
   //////////////// UTILS ////////////////////////////////////////////////////
 

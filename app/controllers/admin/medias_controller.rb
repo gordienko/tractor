@@ -20,6 +20,14 @@ class Admin::MediasController < AdminController
     render layout: false
   end
 
+  def attachment
+    media = Media.find(params[:id])
+    content = ApplicationController.render(partial: 'medias/media',
+                                           locals: { media: media },
+                                           formats: :html)
+    render json: { content: content, sgid: media.attachable_sgid }
+  end
+
   def picker
     @medias = Media.all
   end
