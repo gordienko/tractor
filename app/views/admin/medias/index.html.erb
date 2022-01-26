@@ -10,9 +10,7 @@
 </div>
 <div class="card">
         <div class="card-body">
-
           <%= search_form_for [:admin,@q], class: :search  do |f| %>
-
             <div class="row gy-2 gx-3 align-items-center">
               <div class="col-auto">
                 <%= f.search_field :name_cont, class: "form-control", placeholder: "Name Contains" %>
@@ -37,8 +35,7 @@
               <% @medias.each do |media| %>
                 <tr>
                     <td>
-
-                      <%= render "media_preview", media: media, x: 100, y: 100 %>
+                      <%= render "media_preview", media: media, size: :microthumb %>
                     </td>
                     <td>
                       <%= media.file.filename if media.file.attached? %>

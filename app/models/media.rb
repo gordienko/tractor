@@ -11,8 +11,9 @@
 class Media < ApplicationRecord
   include ActionText::Attachable
   has_one_attached :file do |attachable|
-    # attachable.variant :thumb, resize_to_fit: [100, 100]
     attachable.variant :thumb, resize_to_fill: [360, 260]
+    attachable.variant :minithumb, resize_to_fill: [200, 200]
+    attachable.variant :microthumb, resize_to_fill: [100, 100]
   end
   #validate :correct_document_mime_type
   validates :name, presence: true
