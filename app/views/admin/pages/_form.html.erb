@@ -4,7 +4,7 @@
 
   <div class="form-inputs">
     <%= f.input :title %>
-    <%= f.rich_text_area :content, data: { controller: "bebop" } %>
+    <%= f.rich_text_area :content, data: { controller: "bebop", action: "pick:choosemedia->bebop#setmedia" } %>
     <%= f.rich_text_area :content_two, data: { controller: "bebop" } %>
     <hr>
     <%= f.input :template, as: :select, collection: Page.templates %>

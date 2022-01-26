@@ -143,8 +143,8 @@ export default class extends Controller {
                              <div class="trix-button-group">
                                <input type="button" class="trix-button trix-button--dialog" data-trix-custom="add-media" value="Add">
                              </div>
-                             </div>
-                             <div id='media-finder' class='media-finder' data-trix-custom="media-finder">
+                           </div>
+                           <div id='media-finder'  data-editor-id="${this.element.id}"  class='media-finder' data-trix-custom="media-finder">
                            </div>
                          </div>`
      this.dialogsElement.insertAdjacentHTML("beforeend", dialogHTML)
@@ -179,7 +179,6 @@ export default class extends Controller {
 
    }
 
-
    // eventListenerForMediaChosen(){
    //   // console.log(this.dialogsElement)
    //   this.dialogsElement.querySelector('.media-picker-item').addEventListener("click", e => {
@@ -187,9 +186,13 @@ export default class extends Controller {
    //   })
    // }
 
-   choosemedia(e){
+   setmedia(e){
      console.log(e)
-     console.log('choosemedia')
+     console.log('setmedia')
+   }
+
+   boink(){
+     return 'squeal'
    }
 
   //////////////// UTILS ////////////////////////////////////////////////////
