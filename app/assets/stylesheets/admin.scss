@@ -6,3 +6,26 @@
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import 'bootstrap/scss/bootstrap';
 @import 'admin/file_field';
+
+
+.media-picker-item{
+  border: 1px solid #eee;
+  margin-top: 1em;
+  cursor: pointer;
+  img{
+    border: none;
+    width: 100% ;
+  }
+  .details{
+    padding: 1em;
+    h2{
+      font-size: 1.1em;
+      font-weight: normal;
+    }
+    .meta{
+      color: #ccc;
+      font-size: 10px;
+    }
+  }
+
+}

@@ -1,10 +1,18 @@
 <div class="container">
-  <div class="row row-cols-6" data-controller="pick">
+  <div class="row row-cols-4" data-controller="pick">
     <% @medias.order(created_at: :desc ).each do |media| %>
       <div class="col">
         <div class="media-picker-item" data-pick-id-param="<%= media.id %>"   data-action="click->pick#choosemedia">
-          <%= render "/admin/medias/media_preview", x: 100, y: 100, media: media %><br>
-          <%= media.name %> <br>(<%= truncate(media.file.filename.to_s, length: 10) %> <%= number_to_human_size media.file.byte_size %>)
+          <%= render "/admin/medias/media_preview", size: :thumb, media: media %><br>
+          <div class="details">
+            <h2><%= media.name %></h2>
+            <div class="meta">
+              <%= truncate(media.file.filename.to_s, length: 30) %> <br>
+              <%= number_to_human_size media.file.byte_size %> | <%= media.file.filename.extension %> | <%= media.width  %> x <%= media.height %><br>
+              <%= media.created_at.to_s(:short) %>
+            </div>
+
+          </div>
         </div>
       </div>
     <% end %>

@@ -10,10 +10,15 @@
 
 class Media < ApplicationRecord
   include ActionText::Attachable
-  has_one_attached :file
+  has_one_attached :file do |attachable|
+    # attachable.variant :thumb, resize_to_fit: [100, 100]
+    attachable.variant :thumb, resize_to_fill: [360, 260]
+  end
   #validate :correct_document_mime_type
   validates :name, presence: true
+
   validate :file_is_attached
+
   attr_accessor :file_destroy
   include Destroyable
 
@@ -30,6 +35,14 @@ class Media < ApplicationRecord
     end
    end
  end
+
+ def height
+    file.metadata['height']
+  end
+
+  def width
+    file.metadata['width']
+  end
 
  def to_s
    if file.attached?

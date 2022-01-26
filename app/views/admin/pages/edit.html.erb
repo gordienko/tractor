@@ -1,4 +1,8 @@
 <h1>Edit Page</h1>
+<% Media.all.each do |media| %>
+    <%# image_tag media.file.variant(:thumb) %>
+    
+<% end %>
 <div class="card">
   <div class="card-body">
     <%= render 'form', media: @page %>
