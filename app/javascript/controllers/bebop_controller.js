@@ -24,7 +24,7 @@ export default class extends Controller {
     this.eventListenerForMediaButton()
     this.eventListenerForMediaSearch()
     this.eventListenerForMediaMoreButton()
-
+    this.mediaUpload()
   }
 
   //////////////// Embeds ////////////////////////////////////////////////////
@@ -144,12 +144,23 @@ export default class extends Controller {
 
    addMediaDialog(){
      const dialogHTML = `<div class="trix-dialog trix-dialog--link trix-dialog--media" data-trix-dialog="media" data-trix-dialog-attribute="media">
-                           <div class="trix-dialog__link-fields">
-                             <input type="text" name="q[name_cont]" class="media-search-input trix-input trix-input--dialog" placeholder="Search for Media" aria-label="Media Picker" required="" data-trix-input="" disabled="disabled">
-                             <div class="trix-button-group">
-                               <input type="button" class="media-search trix-button trix-button--dialog" data-action="click->bebop#listmedia" data-trix-custom="find-media" value="Search">
-                             </div>
-                           </div>
+
+                           <div class="row">
+   <div class="col">
+    <div class="trix-dialog__link-fields">
+      <input type="text" name="q[name_cont]" class="media-search-input trix-input trix-input--dialog" placeholder="Search for Media" aria-label="Media Picker" required="" data-trix-input="" disabled="disabled">
+      <div class="trix-button-group">
+        <input type="button" class="media-search trix-button trix-button--dialog" data-action="click->bebop#listmedia" data-trix-custom="find-media" value="Search">
+      </div>
+    </div>
+   </div>
+   <div class="col">
+      <form class="media-upload-form"><input type="file" class="media-upload-input" ><button class='media-upload-button' type="submit">Upload</button></form>
+      <div class="media-upload-feedback"></div>
+   </div>
+   </div>
+
+
                            <div id='media-finder'  data-editor-id="${this.element.id}"  class='media-finder' data-trix-custom="media-finder">
                            </div>
                            <p class="text-center"><a href="#" class='media-more-link'>More</a></p>
@@ -240,6 +251,32 @@ export default class extends Controller {
       this.toolbarElement.querySelector('.media-more-link').classList.add('hide')
      }
    }
+
+
+   mediaUpload(){
+      this.dialogsElement.querySelector('.media-upload-button').addEventListener("click", e => {
+        e.preventDefault()
+        let formData = new FormData()
+        formData.append("media[file]", this.dialogsElement.querySelector('.media-upload-input').files[0]);
+        let _this = this
+        Rails.ajax({
+          type: 'POST',
+          url: `/admin/medias/new/pickercreate`,
+          data: formData,
+           format: 'json',
+          success: function(a){
+            let content = a.content
+            let sgid = a.sgid
+            const attachment = new Trix.Attachment({content, sgid})
+            _this.element.editor.insertAttachment(attachment)
+            _this.element.editor.insertLineBreak()
+          }
+        })
+      })
+   }
+
+
+
 
   //////////////// UTILS ////////////////////////////////////////////////////
 

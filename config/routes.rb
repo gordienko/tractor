@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :medias do
       get :picker
       get :attachment, on: :member
+      post :pickercreate, on: :new
       collection do
         get 'search'
       end

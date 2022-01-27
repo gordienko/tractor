@@ -4,7 +4,7 @@ class Admin::MediasController < AdminController
     # @media = Media.all
     @q = Media.ransack(params[:q])
 
-    @medias = @q.result(distinct: true).order(id: :asc)
+    @medias = @q.result(distinct: true).order(id: :desc)
     # @medias = @medias.where(provider_id: current_user.provider_id)
     @pagy, @medias = pagy(@medias, items: 10)
     #authorize @medias
@@ -59,6 +59,20 @@ class Admin::MediasController < AdminController
   # GET /media/1/edit
   def edit
     #authorize @media
+  end
+
+  def pickercreate
+    @media = Media.new(media_params)
+    if @media.name.blank?
+      @media.name = @media.file.filename.base
+    end
+    if @media.save
+      content = ApplicationController.render(partial: 'medias/media',
+                                             locals: { media: @media },
+                                             formats: :html)
+      render json: { content: content, sgid: @media.attachable_sgid }
+    end
+
   end
 
   # POST /media
