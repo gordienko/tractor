@@ -123,7 +123,7 @@ class Admin::MediasController < AdminController
       if URI(request.referer).path == '/dash'
         '/dash'
       else
-        medias_path
+        admin_medias_path
       end
     end
 
