@@ -7,6 +7,10 @@ export default class extends Controller {
       return [ "field" ]
   }
 
+  initialize() {
+    this.offset = 40
+  }
+
   connect() {
     this.addEmbedButton()
     this.addEmbedDialog()
@@ -18,12 +22,14 @@ export default class extends Controller {
     this.addMediaButton()
     this.addMediaDialog()
     this.eventListenerForMediaButton()
+    this.eventListenerForMediaSearch()
+    this.eventListenerForMediaMoreButton()
 
   }
 
   //////////////// Embeds ////////////////////////////////////////////////////
   addEmbedButton() {
-    const buttonHTML = '<button  type="button" class="trix-button tricks-embed"  data-trix-attribute="embed" data-trix-action="embed"   data-action="click->tricks#showembed" title="Embed" tabindex="-1">Embed</button>'
+    const buttonHTML = '<button  type="button" class="trix-button tricks-embed"  data-trix-attribute="embed" data-trix-action="embed"    title="Embed" tabindex="-1">Embed</button>'
     this.buttonGroupBlockTools.insertAdjacentHTML("beforeend", buttonHTML)
   }
 
@@ -139,13 +145,14 @@ export default class extends Controller {
    addMediaDialog(){
      const dialogHTML = `<div class="trix-dialog trix-dialog--link trix-dialog--media" data-trix-dialog="media" data-trix-dialog-attribute="media">
                            <div class="trix-dialog__link-fields">
-                             <input type="text" name="media" class="trix-input trix-input--dialog" placeholder="Search for Media" aria-label="Media Picker" required="" data-trix-input="" disabled="disabled">
+                             <input type="text" name="q[name_cont]" class="media-search-input trix-input trix-input--dialog" placeholder="Search for Media" aria-label="Media Picker" required="" data-trix-input="" disabled="disabled">
                              <div class="trix-button-group">
-                               <input type="button" class="trix-button trix-button--dialog" data-trix-custom="add-media" value="Add">
+                               <input type="button" class="media-search trix-button trix-button--dialog" data-action="click->bebop#listmedia" data-trix-custom="find-media" value="Search">
                              </div>
                            </div>
                            <div id='media-finder'  data-editor-id="${this.element.id}"  class='media-finder' data-trix-custom="media-finder">
                            </div>
+                           <p class="text-center"><a href="#" class='media-more-link'>More</a></p>
                          </div>`
      this.dialogsElement.insertAdjacentHTML("beforeend", dialogHTML)
    }
@@ -157,37 +164,65 @@ export default class extends Controller {
    }
 
    showmedia(e){
-     const dialog = this.dialogsElement.querySelector('[data-trix-dialog="media"]')
-     const mediaInput = this.dialogsElement.querySelector('[name="media"]')
      if (event.target.classList.contains("trix-active")) {
        event.target.classList.remove("trix-active");
-       dialog.classList.remove("trix-active");
-       delete dialog.dataset.trixActive;
-       mediaInput.setAttribute("disabled", "disabled");
+       this.mediaDialog().classList.remove("trix-active");
+       delete this.mediaDialog().dataset.trixActive;
+       this.mediaInput().setAttribute("disabled", "disabled");
      } else {
        event.target.classList.add("trix-active");
-       dialog.classList.add("trix-active");
-       dialog.dataset.trixActive = "";
-       mediaInput.removeAttribute("disabled");
-       mediaInput.focus();
-       let place = dialog.querySelector('[data-trix-custom="media-finder"]')
-       fetch('/admin/medias/search')
-         .then(response => response.text())
-         .then(html => place.innerHTML = html)
+       this.mediaDialog().classList.add("trix-active");
+       this.mediaDialog().dataset.trixActive = "";
+       this.mediaInput().removeAttribute("disabled");
+       this.mediaInput().focus();
+
+       this.listmedia()
            // this.eventListenerForMediaChosen()
      }
-
    }
 
-   // eventListenerForMediaChosen(){
-   //   // console.log(this.dialogsElement)
-   //   this.dialogsElement.querySelector('.media-picker-item').addEventListener("click", e => {
-   //     this.choosemedia(e)
-   //   })
-   // }
+   mediaDialog(){
+    return  this.dialogsElement.querySelector('[data-trix-dialog="media"]')
+   }
+
+   mediaInput(){
+     return this.dialogsElement.querySelector('.media-search-input')
+   }
+
+   eventListenerForMediaSearch(){
+     this.toolbarElement.querySelector('.media-search').addEventListener("click", e => {
+       this.listmedia()
+     })
+   }
+
+   eventListenerForMediaMoreButton(){
+     this.toolbarElement.querySelector('.media-more-link').addEventListener("click", e => {
+       e.preventDefault()
+       fetch(`/admin/medias/search?offset=${this.offset}&q[name_cont]=${this.mediaInput().value}&commit=Search`)
+         .then(response => response.json())
+         .then(data => {
+           this.mediaPlace().innerHTML += data["content"]
+           this.offset = this.offset + 40
+          this.checkMediaCount(data["count"])
+         })
+     })
+   }
+
+   listmedia(){
+     fetch(`/admin/medias/search?offset=0&q[name_cont]=${this.mediaInput().value}&commit=Search`)
+       .then(response => response.json())
+       .then(data => {
+         this.mediaPlace().innerHTML = data["content"]
+         this.offset = 40
+         this.checkMediaCount(data["count"])
+       })
+   }
+
+   mediaPlace(){
+     return this.mediaDialog().querySelector('[data-trix-custom="media-finder"]')
+   }
 
    setmedia(id){
-      console.log(`set ${id}`)
       let _this = this
       Rails.ajax({
         type: 'GET',
@@ -200,6 +235,11 @@ export default class extends Controller {
       })
    }
 
+   checkMediaCount(count){
+     if (count < this.offset){
+      this.toolbarElement.querySelector('.media-more-link').classList.add('hide')
+     }
+   }
 
   //////////////// UTILS ////////////////////////////////////////////////////
 

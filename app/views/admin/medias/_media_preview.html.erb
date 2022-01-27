@@ -1,7 +1,7 @@
 <% if media.file.attached? %>
   <% if media.file.previewable?  %>
-    <%= image_tag media.file.preview(resize_to_fit: [x, y]), class: "img-thumbnail" %>
+    <%= image_tag url_for(media.file.preview(resize_to_fit: [x, y])), class: "img-thumbnail" %>
   <% elsif media.file.filename.extension.in? ['jpg', 'png'] %>
-    <%= image_tag media.file.variant(size) %>
+    <%= image_tag url_for(media.file.variant(size)) %>
   <% end %>
 <% end %>

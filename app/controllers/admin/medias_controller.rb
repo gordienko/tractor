@@ -16,8 +16,15 @@ class Admin::MediasController < AdminController
   end
 
   def search
-    @medias = Media.all
-    render layout: false
+    @q = Media.ransack(params[:q])
+    @medias = @q.result(distinct: true).order(id: :asc).limit(40).offset(params[:offset])
+    @count = @q.result(distinct: true).count
+    content = ApplicationController.render(template: 'admin/medias/search',
+                                           layout: false,
+                                           locals: { medias: @medias },
+                                           formats: :html)
+    render json: { content: content, count: @count  }
+    # render layout: false
   end
 
   def attachment

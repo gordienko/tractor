@@ -7,7 +7,10 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'admin/file_field';
 
-
+#media-finder{
+  overflow-y: scroll;
+  height: 500px;
+}
 .media-picker-item{
   border: 1px solid #eee;
   margin-top: 1em;
@@ -25,7 +28,9 @@
     .meta{
       color: #ccc;
       font-size: 10px;
+      overflow-x: auto;
     }
   }
 
 }
+.hide{display: none}
