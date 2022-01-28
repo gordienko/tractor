@@ -81,3 +81,4 @@ gem "erd"
 gem 'pagy', '~> 5.7' # omit patch digit
 gem 'ransack'
 gem "acts_as_list"
+gem 'friendly_id', '~> 5.4.0'

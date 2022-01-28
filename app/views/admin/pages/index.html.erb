@@ -17,6 +17,7 @@
 
 
             <th>Title</th>
+            <th>Link</th>
             <th>Template</th>
             <th>Date</th>
 
@@ -27,8 +28,8 @@
         <% @pages.each do |page| %>
             <tr data-id="<%= page.id %>">
               <td class='handle'><i class="bi bi-grip-vertical"></i></td>
-
               <td><b><%= page.title %></b></td>
+              <td><%= link_to "/#{page.slug}", page, target: "_blank" %></td>
               <td><%= page.template %></td>
               <td><%= page.created_at.to_s(:short_civillian) %></td>
               <td class="actions">

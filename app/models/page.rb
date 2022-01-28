@@ -15,12 +15,19 @@
 #
 
 class Page < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   validates :title, presence: true
+
   validates :template, presence: true
   has_rich_text :content
   has_rich_text :content_two
   acts_as_list
 
+  def should_generate_new_friendly_id?
+    slug.blank?
+  end
 
   def self.templates
     ['Standard', 'Contact', 'History' ]

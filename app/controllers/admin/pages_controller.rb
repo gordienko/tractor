@@ -53,10 +53,10 @@ end
   end
 
   def set_page
-    @page = Page.find(params[:id])
+    @page = Page.friendly.find(params[:id])
   end
 
   def page_params
-    params.require(:page).permit(:title, :content, :template, :keywords, :description, :content_two)
+    params.require(:page).permit(:title, :content, :template, :keywords, :description, :content_two, :slug)
   end
 end
