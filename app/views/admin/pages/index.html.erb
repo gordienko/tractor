@@ -19,7 +19,7 @@
             <th>Title</th>
             <th>Link</th>
             <th>Template</th>
-            <th>Date</th>
+            <th>Created</th>
 
             <th class="actions"></th>
           </tr>
@@ -28,10 +28,10 @@
         <% @pages.each do |page| %>
             <tr data-id="<%= page.id %>">
               <td class='handle'><i class="bi bi-grip-vertical"></i></td>
-              <td><b><%= page.title %></b></td>
+              <td><b><%= link_to page.title, edit_admin_page_path(page) %></b></td>
               <td><%= link_to "/#{page.slug}", page, target: "_blank" %></td>
               <td><%= page.template %></td>
-              <td><%= page.created_at.to_s(:short_civillian) %></td>
+              <td class='secondary'><%= page.created_at.to_s(:short_civillian) %></td>
               <td class="actions">
                 <%= link_to "<i class='bi-pencil'></i>".html_safe, edit_admin_page_path(page) %>
                         <%= link_to "<i class='bi-trash'></i>".html_safe, admin_page_path(page), data: {
