@@ -33,3 +33,24 @@
   }
 
 }
+.trix-button-ss{
+  background-color: white;
+  border: 1px solid #bbb;
+  border-top-color: #ccc;
+  border-bottom-color: #888;
+  border-radius: 3px;
+  border-bottom: 1px solid #888 !important;
+}
+.dialog-results{
+  padding: 2em 0;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 1em;
+}
+.link-finder{
+  input[type="text"]{
+    border-radius: 8px;
+    border: 1px solid #eee;
+    padding: 1em;
+    width: 100%;
+  }
+}

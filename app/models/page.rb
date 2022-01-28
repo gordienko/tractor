@@ -16,6 +16,8 @@
 
 class Page < ApplicationRecord
   extend FriendlyId
+  include ActionText::Attachable
+  
   friendly_id :title, use: :slugged
 
   validates :title, presence: true

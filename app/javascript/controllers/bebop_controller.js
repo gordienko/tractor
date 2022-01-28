@@ -25,6 +25,11 @@ export default class extends Controller {
     this.eventListenerForMediaSearch()
     this.eventListenerForMediaMoreButton()
     this.mediaUpload()
+
+
+    this.addLinkerButton()
+    this.addLinkerDialog()
+    this.eventListenerForLinker()
   }
 
   //////////////// Embeds ////////////////////////////////////////////////////
@@ -274,6 +279,59 @@ export default class extends Controller {
         })
       })
    }
+
+  //////////////// UTILS ////////////////////////////////////////////////////
+
+  addLinkerButton(){
+    const buttonHTML = '<button type="button" class="trix-button linker-button" data-trix-attribute="linker" data-trix-action="linker" title="Linker" tabindex="-1">Link</button>'
+    this.buttonGroupFileTools.insertAdjacentHTML("beforeend", buttonHTML)
+  }
+
+  addLinkerDialog (){
+    const dialogHTML = `<div class="trix-dialog linker trix-dialog--linker trix-dialog--linker" data-trix-dialog="linker" data-trix-dialog-attribute="linker">
+                          <div class='link-finder' data-controller="linker"  data-editor-id="${this.element.id}"  class='linker' data-trix-custom="link-finder">
+                            <h4>Find Link</h4>
+                            <input type="text" class='linker-input' placeholder="Search for link" data-linker-target="q" data-action="keyup->linker#seek"/>
+                            <div class='linker-results dialog-results' data-linker-target="results" >Results..</div>
+                            <span data-linker-target="preview"></span><input id='option' type="hidden" value="" disabled data-linker-target="input">
+                            <input type="button" data-action="click->linker#greet" data-linker-target="submit" disabled="disabled" class='trix-button-ss trix-button--dialog' value="Add Link" />
+                          </div>
+                        </div>
+
+                        `
+    this.dialogsElement.insertAdjacentHTML("beforeend", dialogHTML)
+  }
+
+  eventListenerForLinker(){
+    this.toolbarElement.querySelector('.linker-button').addEventListener("click", e => {
+      console.log(this.element.editor.getSelectedRange())
+      const dialog = this.toolbarElement.querySelector('.linker')
+      if (event.target.classList.contains("trix-active")) {
+        event.target.classList.remove("trix-active");
+        dialog.classList.remove("trix-active");
+        delete dialog.dataset.trixActive;
+      } else {
+        event.target.classList.add("trix-active");
+        dialog.classList.add("trix-active");
+        dialog.dataset.trixActive = "";
+      }
+      e.preventDefault()
+    })
+  }
+
+  setLinker(content, sgid){
+
+    console.log(content)
+    console.log(sgid)
+
+    let link_text = this.element.editor.getDocument().getStringAtRange(this.element.editor.getSelectedRange())
+    // this.element.editor.insertHTML(`<a target="_blank" href="/about-me">${text}</a>`)
+
+    const attachment = new Trix.Attachment({content, sgid})
+    attachment.setAttributes(link_text: link_text, link_class: 'a-class')
+    this.element.editor.insertAttachment(attachment)
+    this.element.editor.insertLineBreak()
+  }
 
 
 

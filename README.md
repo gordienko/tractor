@@ -54,3 +54,6 @@ myDialogHtml =
     content: media.content
     })
   this.editor.instertAttachment(attachment)
+
+https://thoughtbot.com/blog/full-text-search-with-postgres-and-action-text
+https://github.com/basecamp/trix/issues/55

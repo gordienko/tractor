@@ -1,0 +1,8 @@
+<ul>
+<% links.each do |link| %>
+    <li data-id="<%= link.id %>" data-search-target="option"
+        data-action="click->linker#selectRadioOption">
+      /<%= link.slug %>
+    </li>
+<% end %>
+</ul>

@@ -14,3 +14,6 @@ application.register("bebop", BebopController)
 
 import PickController from "./pick_controller"
 application.register("pick", PickController)
+
+import LinkerController from "./linker_controller"
+application.register("linker", LinkerController)
