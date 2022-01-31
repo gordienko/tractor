@@ -320,17 +320,12 @@ export default class extends Controller {
   }
 
   setLinker(content, sgid){
-
-    console.log(content)
-    console.log(sgid)
-
     let link_text = this.element.editor.getDocument().getStringAtRange(this.element.editor.getSelectedRange())
     // this.element.editor.insertHTML(`<a target="_blank" href="/about-me">${text}</a>`)
-
     const attachment = new Trix.Attachment({content, sgid})
-    attachment.setAttributes(link_text: link_text, link_class: 'a-class')
+     attachment.setAttributes(caption: 'a caption', presentation: 'a-class')
     this.element.editor.insertAttachment(attachment)
-    this.element.editor.insertLineBreak()
+    // this.element.editor.insertLineBreak()
   }
 
 

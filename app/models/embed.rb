@@ -25,4 +25,12 @@ class Embed
       id
     end
   end
+
+  def thumbnail_url
+    "http://i3.ytimg.com/vi/#{id}/maxresdefault.jpg"
+  end
+
+  # def to_trix_content_attachment_partial_path
+  #   "youtubes/thumbnail"
+  # end
 end

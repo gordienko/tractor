@@ -14,7 +14,7 @@ class Admin::LinksController < AdminController
   def attachment
     link = Page.find(params[:id])
     content = ApplicationController.render(partial: 'links/link',
-                                           locals: { link: link, text: params[:text] },
+                                           locals: { page: link, text: params[:text] },
                                            formats: :html)
     render json: { content: content, sgid: link.attachable_sgid }
   end

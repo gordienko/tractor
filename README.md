@@ -57,3 +57,15 @@ myDialogHtml =
 
 https://thoughtbot.com/blog/full-text-search-with-postgres-and-action-text
 https://github.com/basecamp/trix/issues/55
+https://github.com/basecamp/trix/issues/952
+https://stackoverflow.com/questions/70928088/add-attributes-to-actiontext-trix-attachment
+https://github.com/excid3/railsconf-2020-actiontext/blob/master/app/models/youtube.rb
+https://github.com/excid3/railsconf-2020-actiontext/blob/master/app/models/youtube.rb
+
+
+render different in editor
+allow target (its allowed in rails.  but not trix)
+how can i add target
+add attributes to attachment
+use attributes in partial
+use embed gem https://github.com/ruby-oembed/ruby-oembed

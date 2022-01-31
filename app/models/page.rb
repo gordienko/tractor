@@ -17,7 +17,7 @@
 class Page < ApplicationRecord
   extend FriendlyId
   include ActionText::Attachable
-  
+
   friendly_id :title, use: :slugged
 
   validates :title, presence: true
@@ -33,5 +33,10 @@ class Page < ApplicationRecord
 
   def self.templates
     ['Standard', 'Contact', 'History' ]
+  end
+
+  def to_trix_content_attachment_partial_path
+    # you need to use this so each time editor is brought up this partial is used.  also set this partial in controller
+    "links/link"
   end
 end
