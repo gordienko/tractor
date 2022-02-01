@@ -306,6 +306,7 @@ export default class extends Controller {
     // let link_text = this.element.editor.getDocument().getStringAtRange(this.element.editor.getSelectedRange())
     // this.element.editor.insertHTML(`<a target="_blank" href="/about-me">${text}</a>`)
     const attachment = new Trix.Attachment({content, sgid})
+    console.log(attachment)
     // attachment.setAttributes({'thing': 'my link text',  'caption': 'a caption', 'presentation': 'a-class', 'thong': 'a thong'})
     this.element.editor.insertAttachment(attachment)
     // this.element.editor.insertLineBreak()

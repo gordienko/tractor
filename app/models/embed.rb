@@ -6,15 +6,18 @@ class Embed < ApplicationRecord
 
 
   def setup
-    OEmbed::Providers.register_all
-    puts url
-    resource = OEmbed::Providers.get(url, {width: '500px'})
+    resource = oembed
     self.video  = resource.video?
     if resource.video?
       self.thumbnail_url = resource.thumbnail_url
     end
     self.html = resource.html
     self.save
+  end
+
+  def oembed
+    OEmbed::Providers.register_all
+    return OEmbed::Providers.get(url, {width: '500px'})
   end
 
   def to_trix_content_attachment_partial_path
