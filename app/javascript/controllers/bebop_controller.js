@@ -320,11 +320,14 @@ export default class extends Controller {
   }
 
   setLinker(content, sgid){
+    console.log('setLinker')
     let link_text = this.element.editor.getDocument().getStringAtRange(this.element.editor.getSelectedRange())
     // this.element.editor.insertHTML(`<a target="_blank" href="/about-me">${text}</a>`)
     const attachment = new Trix.Attachment({content, sgid})
-     attachment.setAttributes(caption: 'a caption', presentation: 'a-class')
+       attachment.setAttributes({'thing': 'my link text',  'caption': 'a caption', 'presentation': 'a-class', 'thong': 'a thong'})
+     console.log(attachment)
     this.element.editor.insertAttachment(attachment)
+
     // this.element.editor.insertLineBreak()
   }
 
@@ -358,4 +361,19 @@ function addHeadingAttributes() {
   Array.from(["h1", "h2", "h3", "h4", "h5", "h6"]).forEach((tagName, i) => {
     Trix.config.blockAttributes[`heading${(i + 1)}`] = { tagName: tagName, terminal: true, breakOnReturn: true, group: false }
   })
+  Trix.config.attachments = {
+  preview: {
+    presentation: "gallery",
+    thing: 'my-thing',
+    caption: {
+      name: true,
+      size: true
+    }
+  },
+  file: {
+    caption: {
+      size: true
+    }
+  }
+};
 }

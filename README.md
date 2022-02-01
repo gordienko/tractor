@@ -59,7 +59,7 @@ https://thoughtbot.com/blog/full-text-search-with-postgres-and-action-text
 https://github.com/basecamp/trix/issues/55
 https://github.com/basecamp/trix/issues/952
 https://stackoverflow.com/questions/70928088/add-attributes-to-actiontext-trix-attachment
-https://github.com/excid3/railsconf-2020-actiontext/blob/master/app/models/youtube.rb
+
 https://github.com/excid3/railsconf-2020-actiontext/blob/master/app/models/youtube.rb
 
 
