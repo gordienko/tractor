@@ -8,8 +8,8 @@ class Embed < ApplicationRecord
   def setup
     OEmbed::Providers.register_all
     puts url
-    resource = OEmbed::Providers.get(url)
-    self.video  = resource.video?    
+    resource = OEmbed::Providers.get(url, {width: '500px'})
+    self.video  = resource.video?
     if resource.video?
       self.thumbnail_url = resource.thumbnail_url
     end

@@ -75,3 +75,21 @@ a.trix-button{line-height: 23px}
     padding-left: 0;
   }
 }
+
+.embed.video{
+  width: 80%;
+  margin: 1em auto;
+  img{
+    width: 600px;
+    max-width: 100%;
+  }
+}
+
+.link-editor-internal-link{
+  text-decoration: underline;
+  color: #0d58c9;
+  font-weight: normal;
+}
+a{
+  text-decoration: underline;
+}

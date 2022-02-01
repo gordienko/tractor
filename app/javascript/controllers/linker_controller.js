@@ -57,7 +57,7 @@ export default class extends Controller {
   }
 
   finderDiv(){
-    return this.element.closest('.embedder')
+    return this.element.closest('.link-finder')
   }
 
 }
