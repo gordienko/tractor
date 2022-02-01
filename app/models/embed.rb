@@ -1,36 +1,23 @@
-class Embed
-  include ActiveModel::Model
-  include ActiveModel::Attributes
-  include GlobalID::Identification
+class Embed < ApplicationRecord
   include ActionText::Attachable
+  require 'oembed'
 
-  attribute :id
+  after_create :setup
 
-  def self.find(id)
-    new(id: id)
-  end
 
-  def source
-    case
-    when id.include?('youtube.com/embed')
-      id
-    when id.include?('youtube.com/watch')
-      #https://www.youtube.com/watch?v=aqz-KE-bpKQ
-      params = Rack::Utils.parse_query(URI(id).query)
-      "https://www.youtube.com/embed/#{params['v']}"
-    when id.include?('vimeo.com')
-      param = id.split('/').last
-      "https://player.vimeo.com/video/#{param}"
-    else
-      id
+  def setup
+    OEmbed::Providers.register_all
+    puts url
+    resource = OEmbed::Providers.get(url)
+    self.video  = resource.video?    
+    if resource.video?
+      self.thumbnail_url = resource.thumbnail_url
     end
+    self.html = resource.html
+    self.save
   end
 
-  def thumbnail_url
-    "http://i3.ytimg.com/vi/#{id}/maxresdefault.jpg"
+  def to_trix_content_attachment_partial_path
+    "embeds/thumbnail"
   end
-
-  # def to_trix_content_attachment_partial_path
-  #   "youtubes/thumbnail"
-  # end
 end

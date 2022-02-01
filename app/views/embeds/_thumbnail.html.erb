@@ -1,5 +1,10 @@
-<div>
-  <%# image_tag youtube.thumbnail_url, style: "max-width:400px" %>
-  <%= image_tag "http://i3.ytimg.com/vi/2iGBuLQ3S0c/maxresdefault.jpg", style: "max-width:400px" %>
 
+<% if embed.video? %>
+<div>
+  <%= image_tag embed.thumbnail_url, style: "max-width:400px" %>
 </div>
+<% else %>
+<div class="embed">
+  <%= embed.html.html_safe %>
+</div>
+<% end %>

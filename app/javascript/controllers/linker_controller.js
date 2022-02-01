@@ -11,7 +11,7 @@ export default class extends Controller {
 
 
   seek(e){
-    e.preventDefault()    
+    e.preventDefault()
     fetch(`/admin/links/search?q[title_cont]=${this.qTarget.value}`)
       .then(response => response.json())
       .then(data => {
@@ -34,7 +34,7 @@ export default class extends Controller {
       type: 'GET',
       url: `/admin/links/${this.inputTarget.value}/attachment?text=${this.editorText()}`,
       success: ({content, sgid}) => {
-        this.editorController().setLinker(content, sgid);
+        this.editorController().insertAttachment(content, sgid);
       }
     })
   }
@@ -57,7 +57,7 @@ export default class extends Controller {
   }
 
   finderDiv(){
-    return this.element.closest('.link-finder')
+    return this.element.closest('.embedder')
   }
 
 }

@@ -4,7 +4,7 @@ import Rails from "@rails/ujs"
 addHeadingAttributes()
 export default class extends Controller {
   static get targets() {
-      return [ "field" ]
+        return [ "field", "results", "q", "option", "input", "submit", "preview"]
   }
 
   initialize() {
@@ -15,7 +15,7 @@ export default class extends Controller {
     this.addEmbedButton()
     this.addEmbedDialog()
     this.eventListenerForEmbedButton()
-    this.eventListenerForAddEmbedButton()
+
 
     this.insertHeadingElements()
 
@@ -40,10 +40,12 @@ export default class extends Controller {
 
   addEmbedDialog() {
     const dialogHTML = `<div class="trix-dialog trix-dialog--link" data-trix-dialog="embed" data-trix-dialog-attribute="embed" data-tricks-target="embeddialog">
-                          <div class="trix-dialog__link-fields">
-                            <input type="text" name="embed" class="trix-input trix-input--dialog" placeholder="Paste your URL" aria-label="embed code" required="" data-trix-input="" disabled="disabled">
-                            <div class="trix-button-group">
-                              <input type="button" class="trix-button trix-button--dialog" data-trix-custom="add-embed" value="Add">
+                          <div class='embedder' data-controller="embedder"  data-editor-id="${this.element.id}"  class='embedder' data-trix-custom="embedder">
+                            <div class="trix-dialog__link-fields">
+                              <input type="text" name="embed" class="trix-input trix-input--dialog" placeholder="Paste your URL" aria-label="embed code" required="" data-trix-input="" disabled="disabled" data-embedder-target="input">
+                              <div class="trix-button-group">
+                                <input type="button" class="trix-button trix-button--dialog" data-trix-custom="add-embed" value="Add" data-action="click->embedder#embedit" data-embedder-target="submit">
+                              </div>
                             </div>
                           </div>
                         </div>`
@@ -73,26 +75,6 @@ export default class extends Controller {
     })
   }
 
-  eventListenerForAddEmbedButton() {
-    this.dialogsElement.querySelector('[data-trix-custom="add-embed"]').addEventListener("click", event => {
-      const content = this.dialogsElement.querySelector("[name='embed']").value
-      if (content) {
-        let _this = this
-        let formData = new FormData()
-        formData.append("content", content)
-        Rails.ajax({
-          type: 'PATCH',
-          url: '/admin/embed.json',
-          data: formData,
-          success: ({content, sgid}) => {
-            const attachment = new Trix.Attachment({content, sgid})
-            _this.element.editor.insertAttachment(attachment)
-            _this.element.editor.insertLineBreak()
-          }
-        })
-      }
-    })
-  }
 
   //////////////// Headers ////////////////////////////////////////////////////
 
@@ -280,7 +262,7 @@ export default class extends Controller {
       })
    }
 
-  //////////////// UTILS ////////////////////////////////////////////////////
+  //////////////// Linker ////////////////////////////////////////////////////
 
   addLinkerButton(){
     const buttonHTML = '<button type="button" class="trix-button linker-button" data-trix-attribute="linker" data-trix-action="linker" title="Linker" tabindex="-1">Link</button>'
@@ -319,15 +301,13 @@ export default class extends Controller {
     })
   }
 
-  setLinker(content, sgid){
-    console.log('setLinker')
-    let link_text = this.element.editor.getDocument().getStringAtRange(this.element.editor.getSelectedRange())
+  insertAttachment(content, sgid){
+    console.log('insertAttachment')
+    // let link_text = this.element.editor.getDocument().getStringAtRange(this.element.editor.getSelectedRange())
     // this.element.editor.insertHTML(`<a target="_blank" href="/about-me">${text}</a>`)
     const attachment = new Trix.Attachment({content, sgid})
-       attachment.setAttributes({'thing': 'my link text',  'caption': 'a caption', 'presentation': 'a-class', 'thong': 'a thong'})
-     console.log(attachment)
+    // attachment.setAttributes({'thing': 'my link text',  'caption': 'a caption', 'presentation': 'a-class', 'thong': 'a thong'})
     this.element.editor.insertAttachment(attachment)
-
     // this.element.editor.insertLineBreak()
   }
 

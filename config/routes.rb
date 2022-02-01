@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     resources :users
     resource :embed, only: :update
   end
-  resources :youtube, only: :show
+  # resources :embed, only: :show
   resources :pages, only: :show
   resources :articles, only: [:index, :show]
 

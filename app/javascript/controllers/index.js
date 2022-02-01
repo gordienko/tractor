@@ -17,3 +17,6 @@ application.register("pick", PickController)
 
 import LinkerController from "./linker_controller"
 application.register("linker", LinkerController)
+
+import EmbedderController from "./embedder_controller"
+application.register("embedder", EmbedderController)
