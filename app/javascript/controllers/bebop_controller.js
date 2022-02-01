@@ -1,15 +1,13 @@
 import { Controller } from "@hotwired/stimulus"
 import Trix from 'trix'
-import Rails from "@rails/ujs"
+
 addHeadingAttributes()
 export default class extends Controller {
   static get targets() {
         return [ "field", "results", "q", "option", "input", "submit", "preview"]
   }
 
-  initialize() {
-    this.offset = 40
-  }
+
 
   connect() {
     this.addEmbedButton()
@@ -22,9 +20,7 @@ export default class extends Controller {
     this.addMediaButton()
     this.addMediaDialog()
     this.eventListenerForMediaButton()
-    this.eventListenerForMediaSearch()
-    this.eventListenerForMediaMoreButton()
-    this.mediaUpload()
+
 
 
     this.addLinkerButton()
@@ -130,28 +126,32 @@ export default class extends Controller {
    }
 
    addMediaDialog(){
-     const dialogHTML = `<div class="trix-dialog trix-dialog--link trix-dialog--media" data-trix-dialog="media" data-trix-dialog-attribute="media">
-
-                           <div class="row">
+     const dialogHTML = `<div class=" trix-dialog trix-dialog--link trix-dialog--media pick" data-trix-dialog="media" data-trix-dialog-attribute="media">
+  <div data-controller="pick" class="pick"  data-editor-id="${this.element.id}" >
+  <div class="row">
    <div class="col">
     <div class="trix-dialog__link-fields">
-      <input type="text" name="q[name_cont]" class="media-search-input trix-input trix-input--dialog" placeholder="Search for Media" aria-label="Media Picker" required="" data-trix-input="" disabled="disabled">
+      <input data-pick-target="q" type="text" name="q[name_cont]" class="pick-search-input trix-input trix-input--dialog" placeholder="Search for Media" aria-label="Media Picker" required="" data-trix-input="" disabled="disabled">
       <div class="trix-button-group">
-        <input type="button" class="media-search trix-button trix-button--dialog" data-action="click->bebop#listmedia" data-trix-custom="find-media" value="Search">
+        <input type="button" class="media-search trix-button trix-button--dialog" data-action="click->pick#listmedia" data-trix-custom="find-media" value="Search">
       </div>
     </div>
    </div>
    <div class="col">
-      <form class="media-upload-form"><input type="file" class="media-upload-input" ><button class='media-upload-button' type="submit">Upload</button></form>
+      <form class="media-upload-form">
+      <input type="file" class="media-upload-input" data-pick-target="file" >
+      <button class='media-upload-button' type="submit" data-action="click->pick#upload">Upload</button>
+      </form>
       <div class="media-upload-feedback"></div>
    </div>
    </div>
+   <div class="container">
+     <div class="row row-cols-4" id='media-finder' class='media-finder' data-trix-custom="media-finder" data-pick-target="results">
+     </div>
+  </div>
 
-
-                           <div id='media-finder'  data-editor-id="${this.element.id}"  class='media-finder' data-trix-custom="media-finder">
-                           </div>
-                           <p class="text-center"><a href="#" class='media-more-link'>More</a></p>
-                         </div>`
+  <p class="text-center"><a href="#" class='media-more-link' data-pick-target="more" data-action="click->pick#more">More</a></p>
+   </div></div>`
      this.dialogsElement.insertAdjacentHTML("beforeend", dialogHTML)
    }
 
@@ -162,105 +162,29 @@ export default class extends Controller {
    }
 
    showmedia(e){
+     const dialog = this.toolbarElement.querySelector('.pick')
+     const mediaInput = this.toolbarElement.querySelector('.pick-search-input')
      if (event.target.classList.contains("trix-active")) {
        event.target.classList.remove("trix-active");
-       this.mediaDialog().classList.remove("trix-active");
-       delete this.mediaDialog().dataset.trixActive;
-       this.mediaInput().setAttribute("disabled", "disabled");
+       dialog.classList.remove("trix-active");
+       delete dialog.dataset.trixActive;
+       mediaInput.setAttribute("disabled", "disabled");
      } else {
        event.target.classList.add("trix-active");
-       this.mediaDialog().classList.add("trix-active");
-       this.mediaDialog().dataset.trixActive = "";
-       this.mediaInput().removeAttribute("disabled");
-       this.mediaInput().focus();
+       dialog.classList.add("trix-active");
+       dialog.dataset.trixActive = "";
+       mediaInput.removeAttribute("disabled");
+       mediaInput.focus();
 
-       this.listmedia()
+
            // this.eventListenerForMediaChosen()
      }
    }
 
-   mediaDialog(){
-    return  this.dialogsElement.querySelector('[data-trix-dialog="media"]')
-   }
-
-   mediaInput(){
-     return this.dialogsElement.querySelector('.media-search-input')
-   }
-
-   eventListenerForMediaSearch(){
-     this.toolbarElement.querySelector('.media-search').addEventListener("click", e => {
-       this.listmedia()
-     })
-   }
-
-   eventListenerForMediaMoreButton(){
-     this.toolbarElement.querySelector('.media-more-link').addEventListener("click", e => {
-       e.preventDefault()
-       fetch(`/admin/medias/search?offset=${this.offset}&q[name_cont]=${this.mediaInput().value}&commit=Search`)
-         .then(response => response.json())
-         .then(data => {
-           this.mediaPlace().innerHTML += data["content"]
-           this.offset = this.offset + 40
-          this.checkMediaCount(data["count"])
-         })
-     })
-   }
-
-   listmedia(){
-     fetch(`/admin/medias/search?offset=0&q[name_cont]=${this.mediaInput().value}&commit=Search`)
-       .then(response => response.json())
-       .then(data => {
-         this.mediaPlace().innerHTML = data["content"]
-         this.offset = 40
-         this.checkMediaCount(data["count"])
-       })
-   }
-
-   mediaPlace(){
-     return this.mediaDialog().querySelector('[data-trix-custom="media-finder"]')
-   }
-
-   setmedia(id){
-      let _this = this
-      Rails.ajax({
-        type: 'GET',
-        url: `/admin/medias/${id}/attachment`,
-        success: ({content, sgid}) => {
-          const attachment = new Trix.Attachment({content, sgid})
-          _this.element.editor.insertAttachment(attachment)
-          _this.element.editor.insertLineBreak()
-        }
-      })
-   }
-
-   checkMediaCount(count){
-     if (count < this.offset){
-      this.toolbarElement.querySelector('.media-more-link').classList.add('hide')
-     }
-   }
 
 
-   mediaUpload(){
-      this.dialogsElement.querySelector('.media-upload-button').addEventListener("click", e => {
-        e.preventDefault()
-        let formData = new FormData()
-        formData.append("media[file]", this.dialogsElement.querySelector('.media-upload-input').files[0]);
-        let _this = this
-        Rails.ajax({
-          type: 'POST',
-          url: `/admin/medias/new/pickercreate`,
-          data: formData,
-           format: 'json',
-          success: function(a){
-            let content = a.content
-            let sgid = a.sgid
-            const attachment = new Trix.Attachment({content, sgid})
-            _this.element.editor.insertAttachment(attachment)
-            _this.element.editor.insertLineBreak()
-          }
-        })
-      })
-   }
+
+
 
   //////////////// Linker ////////////////////////////////////////////////////
 

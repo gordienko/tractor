@@ -6,7 +6,7 @@
     <%= f.input :title %>
     <%= f.input :slug, placeholder: 'Only use letters numbers and dashes (-).  No spaces' if f.object.persisted? %>
     <%= f.rich_text_area :content, data: { controller: "bebop", action: "pick:choosemedia->bebop#setmedia" } %>
-    <%= f.rich_text_area :content_two, data: { controller: "bebop" } %>
+    <%# f.rich_text_area :content_two, data: { controller: "bebop" } %>
     <hr>
     <%= f.input :template, as: :select, collection: Page.templates %>
     <h2>Meta</h2>
