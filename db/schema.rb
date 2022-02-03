@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_01_115319) do
+ActiveRecord::Schema.define(version: 2022_02_03_155800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2022_02_01_115319) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "parent_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -103,6 +104,10 @@ ActiveRecord::Schema.define(version: 2022_02_01_115319) do
     t.string "template"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "ancestry"
+    t.integer "ancestry_depth", default: 0
+    t.integer "children_count", default: 0
+    t.index ["ancestry"], name: "index_pages_on_ancestry"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 

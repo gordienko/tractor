@@ -84,3 +84,4 @@ gem 'ransack'
 gem "acts_as_list"
 gem 'friendly_id', '~> 5.4.0'
 gem "ruby-oembed"
+gem 'ancestry'

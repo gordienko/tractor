@@ -69,3 +69,5 @@ how can i add target
 add attributes to attachment
 use attributes in partial
 use embed gem https://github.com/ruby-oembed/ruby-oembed
+
+https://slimselectjs.com/
