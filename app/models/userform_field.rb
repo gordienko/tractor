@@ -12,6 +12,10 @@
 #  updated_at  :datetime         not null
 #  userform_id :integer
 #
+# Indexes
+#
+#  index_userform_fields_on_userform_id  (userform_id)
+#
 
 class UserformField < ApplicationRecord
   belongs_to :userform

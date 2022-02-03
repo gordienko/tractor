@@ -4,10 +4,7 @@ import Trix from 'trix'
 addHeadingAttributes()
 export default class extends Controller {
   static get targets() {
-        return [ "field", "results", "q", "option", "input", "submit", "preview"]
   }
-
-
 
   connect() {
     this.addEmbedButton()
@@ -30,12 +27,12 @@ export default class extends Controller {
 
   //////////////// Embeds ////////////////////////////////////////////////////
   addEmbedButton() {
-    const buttonHTML = '<button  type="button" class="trix-button tricks-embed"  data-trix-attribute="embed" data-trix-action="embed"    title="Embed" tabindex="-1">Embed</button>'
-    this.buttonGroupBlockTools.insertAdjacentHTML("beforeend", buttonHTML)
+    const buttonHTML = '<button  type="button" class="trix-button tricks-embed" data-action="click->bebop#bop"  data-trix-attribute="embed" data-trix-action="embed"    title="Embed" tabindex="-1">Embed</button>'
+    this.buttonGroupFileTools.insertAdjacentHTML("beforeend", buttonHTML)
   }
 
   addEmbedDialog() {
-    const dialogHTML = `<div class="trix-dialog trix-dialog--link" data-trix-dialog="embed" data-trix-dialog-attribute="embed" data-tricks-target="embeddialog">
+    const dialogHTML = `<div class="trix-dialog trix-dialog--embed" data-trix-dialog="embed" data-trix-dialog-attribute="embed" data-tricks-target="embeddialog">
                           <div class='embedder' data-controller="embedder"  data-editor-id="${this.element.id}"  class='embedder' data-trix-custom="embedder">
                             <div class="trix-dialog__link-fields">
                               <input type="text" name="embed" class="trix-input trix-input--dialog" placeholder="Paste your URL" aria-label="embed code" required="" data-trix-input="" disabled="disabled" data-embedder-target="input">
@@ -47,6 +44,7 @@ export default class extends Controller {
                         </div>`
     this.dialogsElement.insertAdjacentHTML("beforeend", dialogHTML)
   }
+
 
   showembed(e){
     const dialog = this.toolbarElement.querySelector('[data-trix-dialog="embed"]')
@@ -138,9 +136,9 @@ export default class extends Controller {
     </div>
    </div>
    <div class="col">
-      <form class="media-upload-form">
-      <input type="file" class="media-upload-input" data-pick-target="file" >
-      <button class='media-upload-button' type="submit" data-action="click->pick#upload">Upload</button>
+      <form class="media-upload-form text-right">
+      <input type="file" id="pickfile" name='pickfile' class="media-upload-input" data-pick-target="file" data-action="change->pick#upload">
+
       </form>
       <div class="media-upload-feedback"></div>
    </div>

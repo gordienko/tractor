@@ -13,6 +13,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_pages_on_slug  (slug) UNIQUE
+#
 
 class Page < ApplicationRecord
   extend FriendlyId

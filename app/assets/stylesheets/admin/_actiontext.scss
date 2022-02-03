@@ -93,3 +93,14 @@ a.trix-button{line-height: 23px}
 a{
   text-decoration: underline;
 }
+
+.media-upload-input{
+  border: 1px solid #ccc;
+  padding: 0.3em 0.8em;
+  border-radius: 3px;
+  &::file-selector-button{
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 3px;
+  }
+}

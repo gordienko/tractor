@@ -1,10 +1,21 @@
+# == Schema Information
+#
+# Table name: embeds
+#
+#  id            :integer          not null, primary key
+#  url           :string
+#  video         :boolean
+#  html          :text
+#  thumbnail_url :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 class Embed < ApplicationRecord
   include ActionText::Attachable
   require 'oembed'
 
   after_create :setup
-
-
   def setup
     resource = oembed
     self.video  = resource.video?
