@@ -19,8 +19,8 @@
         </thead>
 
       <% @menus.each do |menu| %>
-          <tr>            
-            <td><%= menu.name %></td>
+          <tr>
+            <td><%= link_to menu.name, admin_menu_path(menu) %></td>
             <td class="actions">
               <%= link_to "<i class='bi-pencil'></i>".html_safe, edit_admin_menu_path(menu) %>
               <%= link_to "<i class='bi-trash'></i>".html_safe, admin_menu_path(menu), data: {

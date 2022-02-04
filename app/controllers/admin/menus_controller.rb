@@ -5,6 +5,10 @@ class Admin::MenusController < AdminController
     @menus = Menu.all
   end
 
+  def show
+
+  end
+
   def new
     @menu = Menu.new
   end

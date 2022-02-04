@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_03_155800) do
+ActiveRecord::Schema.define(version: 2022_02_03_165324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,11 +87,23 @@ ActiveRecord::Schema.define(version: 2022_02_03_155800) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "menuitems", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "ancestry"
+    t.integer "ancestry_depth", default: 0
+    t.integer "children_count", default: 0
+    t.bigint "menu_id"
+    t.integer "position"
+    t.index ["ancestry"], name: "index_menuitems_on_ancestry"
+    t.index ["menu_id"], name: "index_menuitems_on_menu_id"
+  end
+
   create_table "menus", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "parent_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -157,5 +169,6 @@ ActiveRecord::Schema.define(version: 2022_02_03_155800) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "menuitems", "menus"
   add_foreign_key "userform_fields", "userforms"
 end

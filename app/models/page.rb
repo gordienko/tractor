@@ -25,6 +25,7 @@
 class Page < ApplicationRecord
   extend FriendlyId
   include ActionText::Attachable
+  acts_as_list
   has_ancestry cache_depth: true, counter_cache: true
 
   friendly_id :title, use: :slugged
@@ -34,7 +35,7 @@ class Page < ApplicationRecord
   validates :template, presence: true
   has_rich_text :content
   has_rich_text :content_two
-  acts_as_list
+
 
   def should_generate_new_friendly_id?
     slug.blank?

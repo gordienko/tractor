@@ -155,7 +155,13 @@ Rails.application.routes.draw do
     end
     resources :articles
     resources :userforms
-    resources :menus
+    resources :menus do
+      resources :menuitems do
+        member do
+          patch :move
+        end
+      end
+    end
     resources :users
     resource :embed, only: :update
   end

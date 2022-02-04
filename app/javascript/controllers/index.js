@@ -8,6 +8,10 @@ import DragController from "./drag_controller"
 application.register("drag", DragController)
 
 
+import DraggerController from "./dragger_controller"
+application.register("dragger", DraggerController)
+
+
 
 import BebopController from "./bebop_controller"
 application.register("bebop", BebopController)

@@ -54,3 +54,14 @@
     width: 100%;
   }
 }
+
+.list-group-item{
+
+  margin-top: 5px;
+  position: relative;
+  display: block;
+  padding: .75rem 1.25rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: 1px solid #ccc !important;
+}
