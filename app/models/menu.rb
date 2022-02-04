@@ -10,5 +10,5 @@
 
 class Menu < ApplicationRecord
   validates :name, presence: true
-  has_many :menuitems
+  has_many :menuitems, -> { order(position: :asc) }
 end

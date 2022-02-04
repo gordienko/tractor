@@ -9,10 +9,10 @@ module ApplicationHelper
     }.stringify_keys[flash_type.to_s] || flash_type.to_s
   end
 
-  def nested_items(items)    
+  def nested_items(items)
     items.map do |item, sub_items|
       content_tag(:div,
-                  (item.name +  content_tag(
+                  (render(item) +  content_tag(
                                             :div,
                                             nested_items(sub_items),
                                             class: 'nested',

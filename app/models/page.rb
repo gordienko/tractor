@@ -27,6 +27,8 @@ class Page < ApplicationRecord
   include ActionText::Attachable
   acts_as_list
   has_ancestry cache_depth: true, counter_cache: true
+  has_many :menuitems, as: :menuitemable
+
 
   friendly_id :title, use: :slugged
 

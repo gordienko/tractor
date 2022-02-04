@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_03_165324) do
+ActiveRecord::Schema.define(version: 2022_02_04_170736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,8 +96,11 @@ ActiveRecord::Schema.define(version: 2022_02_03_165324) do
     t.integer "children_count", default: 0
     t.bigint "menu_id"
     t.integer "position"
+    t.integer "menuitemable_id"
+    t.text "menuitemable_type"
     t.index ["ancestry"], name: "index_menuitems_on_ancestry"
     t.index ["menu_id"], name: "index_menuitems_on_menu_id"
+    t.index ["menuitemable_type", "menuitemable_id"], name: "index_menuitems_on_menuitemable_type_and_menuitemable_id"
   end
 
   create_table "menus", force: :cascade do |t|
