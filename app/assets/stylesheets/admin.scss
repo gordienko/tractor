@@ -64,13 +64,21 @@
   background-color: #fff;
   border: 1px solid #ccc;
   border-top: 1px solid #ccc !important;
-  > .actions{
+  .menuitem{
+
+  }
+  .subtle{
+    float: right;
+    color: #ccc;
+    margin-right: 2em;
+  }
+  >  .menuitem .actions{
     float: right;
     opacity: 0;
     transition: opacity .25s ease-in-out;
   }
   &:hover{
-    > .actions{
+    > .menuitem  .actions{
       opacity: 1
     }
   }

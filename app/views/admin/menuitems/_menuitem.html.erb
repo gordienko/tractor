@@ -1,9 +1,13 @@
-<%= menuitem.name  %>
+<div class="menuitem">
+  <%= menuitem.name  %>
 
-<div class="actions">
-  <%= link_to "<i class='bi-pencil'></i>".html_safe, edit_admin_menu_menuitem_path(menuitem.menu_id, menuitem.id) %>
-  <%= link_to "<i class='bi-trash'></i>".html_safe, admin_menu_menuitem_path(menuitem.menu_id, menuitem.id), data: {
-                      turbo_method: :delete,
-                      turbo_confirm: "Are you sure?"
-                    } %>
+
+  <div class="actions">
+    <%= link_to "<i class='bi-pencil'></i>".html_safe, edit_admin_menu_menuitem_path(menuitem.menu_id, menuitem.id) %>
+    <%= link_to "<i class='bi-trash'></i>".html_safe, admin_menu_menuitem_path(menuitem.menu_id, menuitem.id), data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"
+                      } %>
+  </div>
+  <a class='subtle' href="<%= menuitem.the_link %>" target="_blank"><%= menuitem.the_link %></a>
 </div>

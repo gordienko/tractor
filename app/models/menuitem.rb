@@ -12,7 +12,8 @@
 #  menu_id           :integer
 #  position          :integer
 #  menuitemable_id   :integer
-#  menuitemable_type :text
+#  menuitemable_type :string
+#  link              :string
 #
 # Indexes
 #
@@ -27,4 +28,13 @@ class Menuitem < ApplicationRecord
   has_ancestry cache_depth: true, counter_cache: true
   belongs_to :menu
   belongs_to :menuitemable, polymorphic: true, optional: true
+
+
+  def the_link
+    if menuitemable
+      menuitemable.link
+    else
+      link
+    end
+  end
 end

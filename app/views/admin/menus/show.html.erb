@@ -1,6 +1,6 @@
 <h1>Menu: <%= @menu.name %></h1>
 <div class="card">
-  <div class="card-body">
+  <div class="card-body" data-controller='menuitem'>
     Add Item
     <%= simple_form_for([:admin, @menu, @menu.menuitems.new]) do |f| %>
       <%= f.error_notification %>
@@ -8,12 +8,15 @@
 
       <div class="form-inputs">
         <%= f.input :name %>
-
+        <%= f.input :link %>
+        <%= f.input :menuitemable_type %>
+        <%= f.input :menuitemable_id %>
       </div>
 
       <div class="form-actions text-right">
         <%= f.button :submit, class: 'btn btn-primary' %>
       </div>
+
     <% end %>
   </div>
 </div>
@@ -21,7 +24,7 @@
 <div class="card ">
   <div  class="card-body nested"
         data-controller="dragger"
-        data-dragger-url="/admin/menus/<%= @menu.id %>/menuitems/:id/move">                          
+        data-dragger-url="/admin/menus/<%= @menu.id %>/menuitems/:id/move">
     <%=  nested_items(@menu.menuitems.arrange(:order => :position)) %>
   </div>
 </div>

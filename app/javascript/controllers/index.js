@@ -24,3 +24,6 @@ application.register("linker", LinkerController)
 
 import EmbedderController from "./embedder_controller"
 application.register("embedder", EmbedderController)
+
+import MenuitemController from "./menuitem_controller"
+application.register("menuitem", MenuitemController)

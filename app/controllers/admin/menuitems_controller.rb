@@ -35,6 +35,6 @@ class Admin::MenuitemsController < AdminController
     @menuitem = Menuitem.find(params[:id])
   end
   def menuitems_params
-    params.require(:menuitem).permit(:name, :menu_id)
+    params.require(:menuitem).permit(:name, :menu_id, :link, :menuitemable_id, menuitemable_type)
   end
 end
