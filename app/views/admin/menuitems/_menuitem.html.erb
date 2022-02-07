@@ -9,7 +9,7 @@
       </div>
       <div class="col-2 actions">
         <% if menuitem.menuitemable %>
-          <%= link_to "#{menuitem.menuitemable.class.to_s.downcase}:#{menuitem.menuitemable.title}", edit_admin_page_path(menuitem.menuitemable.slug), class: 'subtle' %>
+          <%= link_to "#{menuitem.menuitemable.class.to_s.downcase}:#{menuitem.menuitemable.title}", edit_polymorphic_path([:admin, menuitem.menuitemable]), class: 'subtle' %>
         <% end %>
       </div>
       <div class="col-1 text-right actions">
