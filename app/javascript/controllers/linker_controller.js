@@ -8,8 +8,6 @@ export default class extends Controller {
       return [ "field", "results", "q", "option", "input", "submit", "preview"]
   }
 
-
-
   seek(e){
     e.preventDefault()
     fetch(`/admin/links/search?q[title_cont]=${this.qTarget.value}`)

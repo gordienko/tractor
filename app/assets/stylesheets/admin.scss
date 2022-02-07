@@ -72,14 +72,22 @@
     color: #ccc;
     margin-right: 2em;
   }
-  >  .menuitem .actions{
+  >  .menuitem  .actions{
     float: right;
     opacity: 0;
     transition: opacity .25s ease-in-out;
   }
   &:hover{
-    > .menuitem  .actions{
+    > .menuitem > .row > .actions{
       opacity: 1
     }
+  }
+}
+
+.results.menuitem-results{
+  overflow-y: auto;
+  max-height: 300px;
+  li{
+    cursor: pointer;
   }
 }

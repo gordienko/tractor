@@ -6,7 +6,7 @@ class Admin::MenusController < AdminController
   end
 
   def show
-
+    
   end
 
   def new

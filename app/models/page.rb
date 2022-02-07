@@ -51,4 +51,16 @@ class Page < ApplicationRecord
     # you need to use this so each time editor is brought up this partial is used.  also set this partial in controller
     "links/link"
   end
+
+  def to_s
+    title
+  end
+
+  def link
+    "/pages/#{slug}"
+  end
+
+  def link_search
+    "pages:#{slug}"
+  end
 end

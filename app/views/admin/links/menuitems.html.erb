@@ -1,0 +1,13 @@
+<ul>
+<% links.each do |link| %>
+    <li data-id="<%= link.id %>"
+        data-type='Page'
+        data-title='<%= link.to_s %>'
+        data-link='<%= link.link %>'
+        data-linksearch='<%= link.link_search %>'
+        data-search-target="option"
+        data-action="click->menuitem#selectOption">
+      /<%= link.slug %>
+    </li>
+<% end %>
+</ul>

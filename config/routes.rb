@@ -135,6 +135,7 @@ Rails.application.routes.draw do
     get 'homepage', to: 'site#homepage'
     get 'help', to: 'site#help'
     get 'links/search', to: 'links#search'
+    get 'links/menuitems', to: 'links#menuitems'
 
     get 'links/:id/attachment', to: 'links#attachment'
 

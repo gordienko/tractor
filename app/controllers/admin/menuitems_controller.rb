@@ -7,7 +7,7 @@ class Admin::MenuitemsController < AdminController
     if @menuitem.save
        redirect_to admin_menu_path(@menuitem.menu), notice: "Item created."
     else
-       render :new, status: :unprocessable_entity
+       render template: 'admin/menus/show', status: :unprocessable_entity
     end
   end
 
@@ -35,6 +35,6 @@ class Admin::MenuitemsController < AdminController
     @menuitem = Menuitem.find(params[:id])
   end
   def menuitems_params
-    params.require(:menuitem).permit(:name, :menu_id, :link, :menuitemable_id, menuitemable_type)
+    params.require(:menuitem).permit(:name, :menu_id, :link, :menuitemable_id, :menuitemable_type)
   end
 end

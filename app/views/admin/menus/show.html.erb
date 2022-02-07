@@ -2,15 +2,25 @@
 <div class="card">
   <div class="card-body" data-controller='menuitem'>
     Add Item
-    <%= simple_form_for([:admin, @menu, @menu.menuitems.new]) do |f| %>
+    <%
+      @menuitem = @menu.menuitems.new unless @menuitem
+     %>
+    <%= simple_form_for([:admin, @menu, @menuitem]) do |f| %>
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
       <div class="form-inputs">
-        <%= f.input :name %>
-        <%= f.input :link %>
-        <%= f.input :menuitemable_type %>
-        <%= f.input :menuitemable_id %>
+
+        <%= f.input :link,
+                    hint: 'Search against title or slug fields for linkable models like page:about or article:getting started',
+                    input_html: {'autocomplete': "off", 'data-menuitem-target': 'q', 'data-action': 'input->menuitem#search'}  %>
+        <div class="results menuitem-results" data-menuitem-target="results"></div>
+
+        <%= f.input :name, input_html: {'data-menuitem-target': 'name'}, hint: 'Name is required unless a linkable record is chosen. You can override the records name if you want.' %>
+
+        <%= f.input :menuitemable_type, as: :hidden, input_html: {'data-menuitem-target': 'menuitemableType'} %>
+        <%= f.input :menuitemable_id,   as: :hidden, input_html: {'data-menuitem-target': 'menuitemableId'} %>
+
       </div>
 
       <div class="form-actions text-right">
