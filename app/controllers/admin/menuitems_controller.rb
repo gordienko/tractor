@@ -3,11 +3,30 @@ class Admin::MenuitemsController < AdminController
 
   def create
     @menu = Menu.find(params[:menu_id])
-    @menuitem = @menu.menuitems.new(menuitems_params)
+    @menuitem = @menu.menuitems.new(menuitem_params)
     if @menuitem.save
        redirect_to admin_menu_path(@menuitem.menu), notice: "Item created."
     else
        render template: 'admin/menus/show', status: :unprocessable_entity
+    end
+  end
+
+  def edit
+      @menu = @menuitem.menu
+  end
+
+  def update
+    @menu = @menuitem.menu
+    respond_to do |format|
+      if @menuitem.update(menuitem_params)
+        format.html { redirect_to admin_menu_path(@menu), notice: 'Item updated.' }
+        format.json { render :show, status: :ok, location: @menu }
+      else
+        format.html {
+          render template: 'admin/menus/show', status: :unprocessable_entity
+        }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -34,7 +53,7 @@ class Admin::MenuitemsController < AdminController
   def set_menuitem
     @menuitem = Menuitem.find(params[:id])
   end
-  def menuitems_params
+  def menuitem_params
     params.require(:menuitem).permit(:name, :menu_id, :link, :menuitemable_id, :menuitemable_type)
   end
 end

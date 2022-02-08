@@ -1,10 +1,6 @@
-<h1>Menu: <%= @menu.name %></h1>
+
 <div class="card">
   <div class="card-body" data-controller='menuitem'>
-    Add Item
-    <%
-      @menuitem = @menu.menuitems.new unless @menuitem
-     %>
     <%= simple_form_for([:admin, @menu, @menuitem]) do |f| %>
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -28,13 +24,5 @@
       </div>
 
     <% end %>
-  </div>
-</div>
-
-<div class="card ">
-  <div  class="card-body nested"
-        data-controller="dragger"
-        data-dragger-url="/admin/menus/<%= @menu.id %>/menuitems/:id/move">
-    <%=  nested_items(@menu.menuitems.arrange(:order => :position)) %>
   </div>
 </div>

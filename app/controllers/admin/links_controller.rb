@@ -12,6 +12,7 @@ class Admin::LinksController < AdminController
   end
 
   def menuitems
+    #Todo: split this out into methods and neatness.  
     if params[:q].include? ":"
       a = params[:q].split(':')
       if ['Page', 'Article'].include? a[0].capitalize
@@ -26,8 +27,7 @@ class Admin::LinksController < AdminController
       s = params[:q]
     end
 
-    puts "s: #{s} model: #{model}"
-
+    #puts "s: #{s} model: #{model}"
     @links =  model.constantize.where("title like ?", "%#{s}%").or( model.constantize.where("slug like ?", "%#{s}%")).order(id: :asc)
     @count = @links.count
     content = ApplicationController.render(template: 'admin/links/menuitems',

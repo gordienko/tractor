@@ -80,7 +80,7 @@
         opacity: 1
       }
     }
-  }  
+  }
 }
 
 .results.menuitem-results{
@@ -89,4 +89,12 @@
   li{
     cursor: pointer;
   }
+}
+
+.menuitem-record{
+  color: #555;
+  margin-bottom: 1em;
+}
+.menitem-name{
+  cursor: grab;
 }

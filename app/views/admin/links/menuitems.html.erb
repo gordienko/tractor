@@ -5,6 +5,7 @@
         data-title='<%= link.to_s %>'
         data-link='<%= link.link %>'
         data-linksearch='<%= link.link_search %>'
+        data-record="<%= "#{link.class.to_s}:#{link.to_s}" %>"
         data-search-target="option"
         data-action="click->menuitem#selectOption">
       /<%= link.slug %>
