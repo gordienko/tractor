@@ -65,23 +65,22 @@
   border: 1px solid #ccc;
   border-top: 1px solid #ccc !important;
   .menuitem{
-
-  }
-  .subtle{
-    float: right;
-    color: #ccc;
-    margin-right: 2em;
-  }
-  >  .menuitem  .actions{
-    float: right;
-    opacity: 0;
-    transition: opacity .25s ease-in-out;
-  }
-  &:hover{
-    > .menuitem > .row > .actions{
-      opacity: 1
+    .subtle{
+      float: right;
+      color: #ccc;
+      margin-right: 2em;
     }
-  }
+    .actions{
+      float: right;
+      opacity: 0;
+      transition: opacity .25s ease-in-out;
+    }
+    &:hover{
+      .actions{
+        opacity: 1
+      }
+    }
+  }  
 }
 
 .results.menuitem-results{
