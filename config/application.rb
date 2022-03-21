@@ -21,7 +21,9 @@ module BootstrapDemo
 
     config.custom_fields = {
       Standard: {
-        thingy: :string
+        thingy: {type: :string},
+        boat: {type: :select, options: [:scaffie, :mirror, :shrimper]},
+        equipment: {type: :multiselect, options: [:boots, :jacket, :radio]},          
       },
       Contact: {
         lat: :float,

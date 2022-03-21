@@ -20,7 +20,7 @@ class Admin::PagesController < AdminController
   def update
     #authorize @media
     respond_to do |format|
-      if @page.update(page_params(@page.custom_fields_names))
+      if @page.update(page_params(@page.custom_fields_parameters))
         format.html { redirect_to edit_admin_page_path(@page), notice: 'Page was successfully updated.' }
         format.json { render :show, status: :ok, location: @page }
       else
@@ -58,6 +58,7 @@ class Admin::PagesController < AdminController
   end
 
   def page_params(custom_content_items)
+    puts "custom_content_items: #{custom_content_items}"
     params.require(:page).permit(:title, :content, :template, :keywords, :description, :content_two, :slug, custom_content: custom_content_items )
   end
 end

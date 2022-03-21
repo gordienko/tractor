@@ -45,15 +45,27 @@ class Page < ApplicationRecord
   end
 
   def self.templates
-    Rails.application.config.custom_fields.map{|type| type[0]}
+    Rails.application.config.custom_fields.map{|field| field[0]}
   end
 
   def custom_fields
-    Rails.application.config.custom_fields[self.template.to_sym]  
+    Rails.application.config.custom_fields[self.template.to_sym]
   end
 
   def custom_fields_names
-    custom_fields.map{|type| type[0]}
+    custom_fields.map{|field| field[0]}
+  end
+
+  def custom_fields_parameters
+    a = []
+    custom_fields.each do |field|
+      if field[1][:type] == :multiselect
+         a << {field[0] => []}
+      else
+        a << field[0]
+      end
+    end
+    a
   end
 
   def to_trix_content_attachment_partial_path

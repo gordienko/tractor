@@ -1,4 +1,4 @@
-<%= @page.custom_fields %>
+<%# @page.custom_fields %>
 
 <%= simple_form_for([:admin, @page]) do |f| %>
   <%= f.error_notification %>
@@ -15,8 +15,7 @@
 
     <%= f.simple_fields_for :custom_content, OpenStruct.new(@page.custom_content) do |field| %>
       <% @page.custom_fields.each do |custom_field| %>
-        <%=  field.input custom_field[0], as: custom_field[1] , required: false %>
-        <br>
+        <%= render "admin/shared/custom_field/#{custom_field[1][:type]}", field: field, custom_field: custom_field %>                
       <% end %>
     <% end %>
 
