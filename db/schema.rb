@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_04_172141) do
+ActiveRecord::Schema.define(version: 2022_03_21_145958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2022_02_04_172141) do
     t.string "ancestry"
     t.integer "ancestry_depth", default: 0
     t.integer "children_count", default: 0
+    t.jsonb "custom_content", default: {}, null: false
     t.index ["ancestry"], name: "index_pages_on_ancestry"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end

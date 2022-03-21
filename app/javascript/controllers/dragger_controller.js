@@ -20,7 +20,6 @@ export default class extends Controller {
   end(event) {
     let id = event.item.dataset.id
     let parent_node = event.item.closest('.nested')
-    console.log(parent_node.dataset.id)
     let data = new FormData()
     data.append("position", event.newIndex + 1)
     data.append("ancestry", parent_node.dataset.id)

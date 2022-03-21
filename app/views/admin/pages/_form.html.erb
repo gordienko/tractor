@@ -1,3 +1,5 @@
+<%= @page.custom_fields %>
+
 <%= simple_form_for([:admin, @page]) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -8,7 +10,19 @@
     <%= f.rich_text_area :content, data: { controller: "bebop" } %>
     <%# f.rich_text_area :content_two, data: { controller: "bebop" } %>
     <hr>
+    <h2>Page Type</h2>
     <%= f.input :template, as: :select, collection: Page.templates %>
+
+    <%= f.simple_fields_for :custom_content, OpenStruct.new(@page.custom_content) do |field| %>
+      <% @page.custom_fields.each do |custom_field| %>
+        <%=  field.input custom_field[0], as: custom_field[1] , required: false %>
+        <br>
+      <% end %>
+    <% end %>
+
+
+
+    <hr>
     <h2>Meta</h2>
     <%= f.input :description %>
     <%= f.input :keywords %>

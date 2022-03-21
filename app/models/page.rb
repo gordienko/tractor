@@ -15,6 +15,7 @@
 #  ancestry       :string
 #  ancestry_depth :integer          default("0")
 #  children_count :integer          default("0")
+#  custom_content :jsonb            default("{}"), not null
 #
 # Indexes
 #
@@ -44,7 +45,15 @@ class Page < ApplicationRecord
   end
 
   def self.templates
-    ['Standard', 'Contact', 'History' ]
+    Rails.application.config.custom_fields.map{|type| type[0]}
+  end
+
+  def custom_fields
+    Rails.application.config.custom_fields[self.template.to_sym]  
+  end
+
+  def custom_fields_names
+    custom_fields.map{|type| type[0]}
   end
 
   def to_trix_content_attachment_partial_path

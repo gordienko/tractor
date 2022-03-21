@@ -15,6 +15,7 @@
 #  ancestry       :string
 #  ancestry_depth :integer          default("0")
 #  children_count :integer          default("0")
+#  custom_content :jsonb            default("{}"), not null
 #
 # Indexes
 #
