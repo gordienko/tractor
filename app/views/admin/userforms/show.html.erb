@@ -1,0 +1,59 @@
+<h1>Menu: <%= @userform.name %></h1>
+<div class="card">
+  <div class="card">
+    <div class="card-body" data-controller='menuitem'>
+      Add Item
+      <%
+        @userform_field = @userform.userform_fields.new unless @userform_field
+       %>
+      <%= simple_form_for([:admin, @userform, @userform_field]) do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+        <div class="form-inputs">
+
+          <%= f.input :name %>
+          <%= f.input :hint %>
+          <%= f.input :default %>
+          <%= f.input :placeholder %>
+          <%= f.input :field_type, collection: ['Text', 'Email',  'TextArea', 'Select', 'MultiSelect'] %>
+        </div>
+
+        <div class="form-actions text-right">
+          <%= f.button :submit, class: 'btn btn-primary' %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+  <div class="card-body" data-controller='menuitem'>
+    <table class="table">
+      <thead>
+        <tr>
+          <th width='40px'></th>
+          <th>Name</th>
+          <th>Type</th>
+          <th class="actions"></th>
+        </tr>
+      </thead>
+      <tbody data-controller="drag" data-drag-url="/admin/pages/:id/move">
+      <% @userform.userform_fields.each do |userform_field| %>
+        <% if userform_field.persisted? %>
+          <tr>
+              <td class='handle'><i class="bi bi-grip-vertical"></i></td>
+              <td><%= userform_field.name %></td>
+              <td><%= userform_field.field_type %></td>
+              <td class="actions">
+                <%= link_to "<i class='bi-pencil'></i>".html_safe, edit_admin_userform_userform_field_path(@userform.id, userform_field) %>
+                <%= link_to "<i class='bi-trash'></i>".html_safe, admin_userform_userform_field_path(@userform.id,userform_field), data: {
+                                    turbo_method: :delete,
+                                    turbo_confirm: "Are you sure?"
+                                  } %>
+              </td>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

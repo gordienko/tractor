@@ -11,6 +11,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  userform_id :integer
+#  position    :integer
 #
 # Indexes
 #
@@ -21,4 +22,5 @@ class UserformField < ApplicationRecord
   belongs_to :userform
   validates :name, presence: true
   validates :field_type, presence: true
+  acts_as_list scope: :todo_list
 end

@@ -5,6 +5,10 @@ class Admin::UserformsController < AdminController
     @userforms = Userform.all
   end
 
+  def show
+
+  end
+  
   def new
     @userform = Userform.new
   end

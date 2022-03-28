@@ -13,4 +13,5 @@
 class Userform < ApplicationRecord
   validates :name, presence: true
   has_many :userform_fields
+  has_many :userform_submissions
 end

@@ -155,7 +155,13 @@ Rails.application.routes.draw do
       end
     end
     resources :articles
-    resources :userforms
+    resources :userforms do
+      resources :userform_fields do
+        member do
+          patch :move
+        end
+      end
+    end
     resources :menus do
       resources :menuitems do
         member do
@@ -173,6 +179,6 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-   root "articles#index"
+   root "pages#index"
 
 end

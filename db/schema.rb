@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_21_145958) do
+ActiveRecord::Schema.define(version: 2022_03_28_152249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,16 @@ ActiveRecord::Schema.define(version: 2022_03_21_145958) do
     t.string "thumbnail_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "fields", force: :cascade do |t|
+    t.string "name"
+    t.bigint "fieldable_id"
+    t.string "fieldable_type"
+    t.string "ancestry"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ancestry"], name: "index_fields_on_ancestry"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -146,7 +156,15 @@ ActiveRecord::Schema.define(version: 2022_03_21_145958) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "userform_id"
+    t.integer "position"
     t.index ["userform_id"], name: "index_userform_fields_on_userform_id"
+  end
+
+  create_table "userform_submissions", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "userform_id"
+    t.index ["userform_id"], name: "index_userform_submissions_on_userform_id"
   end
 
   create_table "userforms", force: :cascade do |t|
@@ -176,4 +194,5 @@ ActiveRecord::Schema.define(version: 2022_03_21_145958) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "menuitems", "menus"
   add_foreign_key "userform_fields", "userforms"
+  add_foreign_key "userform_submissions", "userforms"
 end
