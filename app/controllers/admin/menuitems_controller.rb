@@ -33,9 +33,9 @@ class Admin::MenuitemsController < AdminController
   def move
     @menuitem = Menuitem.find(params[:id])
     if params[:ancestry] == 'undefined'
-      @menuitem.update_columns(ancestry:  nil)
+      @menuitem.update(parent_id:  nil)
     else
-      @menuitem.update_columns(ancestry:  params[:ancestry])
+      @menuitem.update(parent_id:  params[:ancestry])
     end
     @menuitem.insert_at(params[:position].to_i)
     head :ok
